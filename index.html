@@ -28,9 +28,7 @@ body{
   text-align:center;
 }
 
-.hero{
-  padding:60px 20px 40px;
-}
+.hero{ padding:60px 20px 40px; }
 
 h1{
   margin:0;
@@ -39,11 +37,7 @@ h1{
   text-shadow:0 0 10px var(--blueGlow),0 0 25px var(--blueGlow);
 }
 
-.tagline{
-  margin-top:12px;
-  color:var(--muted);
-  font-size:1.05rem;
-}
+.tagline{ margin-top:12px; color:var(--muted); font-size:1.05rem; }
 
 .motto{
   margin-top:22px;
@@ -52,15 +46,10 @@ h1{
   letter-spacing:2px;
   text-transform:uppercase;
   color:var(--green);
-  text-shadow:
-    0 0 10px var(--greenGlow),
-    0 0 20px var(--greenGlow),
-    0 0 35px rgba(0,207,255,.3);
+  text-shadow:0 0 10px var(--greenGlow),0 0 20px var(--greenGlow),0 0 35px rgba(0,207,255,.3);
 }
 
-.nav{
-  padding:10px 14px 30px;
-}
+.nav{ padding:10px 14px 30px; }
 
 .button,
 .cart-btn{
@@ -82,20 +71,14 @@ h1{
 .cart-btn:hover{
   transform:scale(1.04);
   background:#181818;
-  box-shadow:
-    0 0 16px rgba(0,207,255,.45),
-    0 0 22px rgba(57,255,20,.18);
 }
 
-.section{
-  padding:20px 18px 45px;
-}
+.section{ padding:20px 18px 45px; }
 
 .section h2{
   color:var(--blue);
   font-size:2rem;
   margin-bottom:22px;
-  text-shadow:0 0 10px rgba(0,207,255,.3);
 }
 
 .grid{
@@ -151,6 +134,13 @@ h1{
   margin:10px 0;
 }
 
+.shipping-note{
+  color:var(--green);
+  font-size:.95rem;
+  font-weight:bold;
+  margin:8px 0;
+}
+
 .card-text{
   color:#d2d2d2;
   line-height:1.6;
@@ -174,7 +164,6 @@ h1{
   max-width:90%;
   border-radius:16px;
   margin-top:22px;
-  box-shadow:0 0 30px rgba(0,207,255,.25);
 }
 
 .link-btn{
@@ -204,6 +193,12 @@ h1{
   font-size:1.3rem;
   font-weight:bold;
   margin-top:15px;
+}
+
+.shipping-total{
+  color:#d2d2d2;
+  margin-top:8px;
+  line-height:1.5;
 }
 
 .lightbox{
@@ -248,14 +243,8 @@ footer{
 
 <div class="hero">
   <h1>Joe's Grows</h1>
-
-  <div class="tagline">
-    Rooting Deep • Harvesting Knowledge
-  </div>
-
-  <div class="motto">
-    NUGS NOT DRUGS
-  </div>
+  <div class="tagline">Rooting Deep • Harvesting Knowledge</div>
+  <div class="motto">NUGS NOT DRUGS</div>
 </div>
 
 <div class="nav">
@@ -283,7 +272,6 @@ footer{
 
 <section class="section" id="products">
   <h2>Products</h2>
-
   <div class="grid" id="productGrid"></div>
 </section>
 
@@ -292,10 +280,8 @@ footer{
 
   <div class="cart">
     <div id="cartItems"></div>
-
-    <div class="total" id="cartTotal">
-      Total: $0
-    </div>
+    <div class="total" id="cartTotal">Subtotal: $0</div>
+    <div class="shipping-total" id="shippingTotal">Shipping: $0</div>
 
     <br>
 
@@ -313,11 +299,7 @@ footer{
       Scan the QR code to grab the free cannabis deficiency worksheet.
     </p>
 
-    <img
-      src="/images/joe-qr.png"
-      alt="QR Code"
-      class="qr-img"
-    >
+    <img src="/images/joe-qr.png" alt="QR Code" class="qr-img">
   </div>
 </section>
 
@@ -325,30 +307,10 @@ footer{
   <h2>Official Links</h2>
 
   <div class="link-box">
-
-    <a class="link-btn"
-      href="https://youtube.com/@joesgrows?si=nBPybkPemlsRtrSo"
-      target="_blank">
-      YouTube Channel
-    </a>
-
-    <a class="link-btn"
-      href="https://ko-fi.com/supportjoesgrows"
-      target="_blank">
-      Support Joe
-    </a>
-
-    <a class="link-btn"
-      href="https://beacons.ai/joesgrows"
-      target="_blank">
-      Gear & Affiliate Links
-    </a>
-
-    <a class="link-btn"
-      href="mailto:joethegrowguy@gmail.com">
-      Contact Joe
-    </a>
-
+    <a class="link-btn" href="https://youtube.com/@joesgrows?si=nBPybkPemlsRtrSo" target="_blank">YouTube Channel</a>
+    <a class="link-btn" href="https://ko-fi.com/supportjoesgrows" target="_blank">Support Joe</a>
+    <a class="link-btn" href="https://beacons.ai/joesgrows" target="_blank">Gear & Affiliate Links</a>
+    <a class="link-btn" href="mailto:joethegrowguy@gmail.com">Contact Joe</a>
   </div>
 </section>
 
@@ -367,6 +329,7 @@ const products = [
     code: "JG-01",
     name: "Joe's Grows Shirt + Hat Bundle",
     price: 50,
+    shippingFree: false,
     description: "Official Joe’s Grows apparel bundle featuring the Nugs Not Drugs shirt design with matching hat.",
     image: "bundle.jpg"
   },
@@ -375,6 +338,7 @@ const products = [
     code: "JG-02",
     name: "Joe's Grows Exclusive Snapbacks",
     price: 20,
+    shippingFree: false,
     description: "Exclusive Joe’s Grows snapbacks available in multiple styles.",
     image: "hats.jpg"
   },
@@ -383,7 +347,8 @@ const products = [
     code: "JG-03",
     name: "The Bud Buddy",
     price: 35,
-    description: "Cannabis grow tent organizer shelf with built-in week tracker. Great for meters, tools, sprays, and small grow-room gear. Includes FREE shipping.",
+    shippingFree: true,
+    description: "Cannabis grow tent organizer shelf with built-in week tracker. Great for meters, tools, sprays, and small grow-room gear.",
     image: "t-b-b-white.jpeg",
 
     gallery: [
@@ -433,11 +398,8 @@ products.forEach((product, index) => {
     colorHTML = `
       <select class="color-select" id="color-${index}">
         <option value="">Select Desired Color</option>
-
         ${product.colors.map(color => `
-          <option value="${color}">
-            ${color}
-          </option>
+          <option value="${color}">${color}</option>
         `).join("")}
       </select>
     `;
@@ -454,17 +416,15 @@ products.forEach((product, index) => {
 
       ${galleryHTML}
 
-      <div class="card-title">
-        ${product.name}
+      <div class="card-title">${product.name}</div>
+
+      <div class="price">$${product.price}</div>
+
+      <div class="shipping-note">
+        ${product.shippingFree ? "FREE shipping included" : "Shipping confirmed by Joe"}
       </div>
 
-      <div class="price">
-        $${product.price}
-      </div>
-
-      <div class="card-text">
-        ${product.description}
-      </div>
+      <div class="card-text">${product.description}</div>
 
       ${colorHTML}
 
@@ -483,8 +443,7 @@ function addToCart(index){
   const product = {...products[index]};
 
   if(product.colors){
-    const selectedColor =
-      document.getElementById(`color-${index}`).value;
+    const selectedColor = document.getElementById(`color-${index}`).value;
 
     if(selectedColor === ""){
       alert("Please select a color.");
@@ -495,7 +454,6 @@ function addToCart(index){
   }
 
   cart.push(product);
-
   renderCart();
 }
 
@@ -506,42 +464,57 @@ function removeFromCart(index){
 
 function renderCart(){
 
-  const cartItems =
-    document.getElementById("cartItems");
-
-  const cartTotal =
-    document.getElementById("cartTotal");
+  const cartItems = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
+  const shippingTotal = document.getElementById("shippingTotal");
 
   cartItems.innerHTML = "";
 
-  let total = 0;
+  let subtotal = 0;
+  let hasManualShipping = false;
+  let hasFreeShippingItem = false;
 
   cart.forEach((item,index)=>{
 
-    total += item.price;
+    subtotal += item.price;
+
+    if(item.shippingFree){
+      hasFreeShippingItem = true;
+    } else {
+      hasManualShipping = true;
+    }
 
     cartItems.innerHTML += `
       <div class="cart-item">
 
         ${item.code} -
         ${item.name}
-
-        ${item.selectedColor ? `- ${item.selectedColor}` : ""}
-
+        ${item.selectedColor ? `- Color: ${item.selectedColor}` : ""}
         - $${item.price}
+        ${item.shippingFree ? "- FREE shipping" : "- Shipping confirmed by Joe"}
 
-        <button class="cart-btn"
-          onclick="removeFromCart(${index})">
-
+        <button class="cart-btn" onclick="removeFromCart(${index})">
           Remove
-
         </button>
 
       </div>
     `;
   });
 
-  cartTotal.innerHTML = `Total: $${total}`;
+  cartTotal.innerHTML = `Subtotal: $${subtotal}`;
+
+  if(cart.length === 0){
+    shippingTotal.innerHTML = "Shipping: $0";
+  } else if(hasManualShipping && hasFreeShippingItem){
+    shippingTotal.innerHTML =
+      "Shipping: The Bud Buddy includes FREE shipping. Apparel shipping will be confirmed by Joe.";
+  } else if(hasManualShipping){
+    shippingTotal.innerHTML =
+      "Shipping: Confirm with Joe.";
+  } else {
+    shippingTotal.innerHTML =
+      "Shipping: FREE";
+  }
 }
 
 function submitOrder(){
@@ -551,28 +524,51 @@ function submitOrder(){
     return;
   }
 
-  let total = 0;
+  let subtotal = 0;
+  let hasManualShipping = false;
+  let hasFreeShippingItem = false;
 
-  let body =
-    "Joe's Grows Order:%0D%0A%0D%0A";
+  let body = "Joe's Grows Order:%0D%0A%0D%0A";
 
   cart.forEach(item => {
 
-    total += item.price;
+    subtotal += item.price;
 
-    body +=
-      `${item.code} - ${item.name}`;
+    if(item.shippingFree){
+      hasFreeShippingItem = true;
+    } else {
+      hasManualShipping = true;
+    }
+
+    body += `${item.code} - ${item.name}`;
 
     if(item.selectedColor){
       body += ` - Color: ${item.selectedColor}`;
     }
 
-    body += ` - $${item.price}%0D%0A`;
+    body += ` - $${item.price}`;
+
+    if(item.shippingFree){
+      body += ` - FREE shipping`;
+    } else {
+      body += ` - Shipping confirmed by Joe`;
+    }
+
+    body += `%0D%0A`;
   });
 
   body += `%0D%0A`;
-  body += `Total: $${total}%0D%0A%0D%0A`;
+  body += `Subtotal: $${subtotal}%0D%0A`;
 
+  if(hasManualShipping && hasFreeShippingItem){
+    body += `Shipping Note: The Bud Buddy includes FREE shipping. Apparel shipping will be confirmed by Joe.%0D%0A`;
+  } else if(hasManualShipping){
+    body += `Shipping Note: Shipping will be confirmed by Joe.%0D%0A`;
+  } else {
+    body += `Shipping Note: FREE shipping.%0D%0A`;
+  }
+
+  body += `%0D%0A`;
   body += `Customer Name:%0D%0A`;
   body += `Shipping Address:%0D%0A`;
   body += `Email:%0D%0A`;
@@ -583,17 +579,12 @@ function submitOrder(){
 }
 
 function openLightbox(src){
-
   document.getElementById("lightboxImg").src = src;
-
-  document.getElementById("lightbox")
-    .classList.add("active");
+  document.getElementById("lightbox").classList.add("active");
 }
 
 function closeLightbox(){
-
-  document.getElementById("lightbox")
-    .classList.remove("active");
+  document.getElementById("lightbox").classList.remove("active");
 }
 </script>
 
