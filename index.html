@@ -7,24 +7,18 @@
 <title>Joe's Grows</title>
 
 <style>
-
 :root{
   --bg:#050505;
   --card:#101114;
-
   --blue:#00cfff;
   --blueGlow:rgba(0,207,255,.45);
-
   --green:#39ff14;
   --greenGlow:rgba(57,255,20,.25);
-
   --text:#f2f2f2;
   --muted:#bdbdbd;
 }
 
-html{
-  scroll-behavior:smooth;
-}
+html{ scroll-behavior:smooth; }
 
 body{
   margin:0;
@@ -34,112 +28,78 @@ body{
   text-align:center;
 }
 
-/* HEADER */
-
-.hero{
-  padding:60px 20px 40px;
-}
+.hero{ padding:60px 20px 40px; }
 
 h1{
   margin:0;
   font-size:3rem;
   color:var(--blue);
-
-  text-shadow:
-    0 0 10px var(--blueGlow),
-    0 0 25px var(--blueGlow);
+  text-shadow:0 0 10px var(--blueGlow),0 0 25px var(--blueGlow);
 }
 
-.tagline{
-  margin-top:12px;
-  color:var(--muted);
-  font-size:1.05rem;
-}
+.tagline{ margin-top:12px; color:var(--muted); font-size:1.05rem; }
 
 .motto{
   margin-top:22px;
-
   font-size:2rem;
   font-weight:900;
   letter-spacing:2px;
   text-transform:uppercase;
-
   color:var(--green);
-
-  text-shadow:
-    0 0 10px var(--greenGlow),
-    0 0 20px var(--greenGlow),
-    0 0 35px rgba(0,207,255,.3);
+  text-shadow:0 0 10px var(--greenGlow),0 0 20px var(--greenGlow),0 0 35px rgba(0,207,255,.3);
 }
 
-/* NAV */
+.nav{ padding:10px 14px 30px; }
 
-.nav{
-  padding:10px 14px 30px;
-}
-
-.button{
+.button,
+.cart-btn{
   display:inline-block;
-
   margin:6px;
   padding:12px 18px;
-
   border-radius:999px;
-
   text-decoration:none;
   color:white;
-
   background:#111;
-
   border:1px solid var(--blue);
-
-  box-shadow:
-    0 0 12px rgba(0,207,255,.2);
-
+  box-shadow:0 0 12px rgba(0,207,255,.2);
   transition:.2s ease;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.button:hover{
+.button:hover,
+.cart-btn:hover{
   transform:scale(1.04);
-
   background:#181818;
-
-  box-shadow:
-    0 0 16px rgba(0,207,255,.45),
-    0 0 22px rgba(57,255,20,.18);
+  box-shadow:0 0 16px rgba(0,207,255,.45),0 0 22px rgba(57,255,20,.18);
 }
 
-/* SECTION */
-
-.section{
-  padding:20px 18px 45px;
-}
+.section{ padding:20px 18px 45px; }
 
 .section h2{
   color:var(--blue);
-
   font-size:2rem;
-
   margin-bottom:22px;
-
-  text-shadow:
-    0 0 10px rgba(0,207,255,.3);
+  text-shadow:0 0 10px rgba(0,207,255,.3);
 }
 
-/* CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  max-width:1100px;
+  margin:0 auto;
+}
 
-.card{
+.card,
+.qr-card,
+.link-box,
+.cart{
   background:var(--card);
-
   border-radius:24px;
-
   padding:25px 20px;
-
   border:1px solid rgba(0,207,255,.28);
-
-  box-shadow:
-    0 0 20px rgba(0,207,255,.08);
-
+  box-shadow:0 0 20px rgba(0,207,255,.08);
   max-width:900px;
   margin:0 auto;
 }
@@ -152,11 +112,16 @@ h1{
 
 .card-title{
   color:var(--blue);
-
-  font-size:1.8rem;
+  font-size:1.6rem;
   font-weight:800;
-
   margin-bottom:10px;
+}
+
+.price{
+  color:var(--green);
+  font-size:1.25rem;
+  font-weight:bold;
+  margin:10px 0;
 }
 
 .card-text{
@@ -165,175 +130,107 @@ h1{
   font-size:1.05rem;
 }
 
-/* QR */
-
-.qr-card{
-  max-width:700px;
-  margin:0 auto;
-
-  background:var(--card);
-
-  border-radius:24px;
-
-  padding:35px 20px;
-
-  border:1px solid rgba(0,207,255,.25);
-
-  box-shadow:
-    0 0 25px rgba(0,207,255,.12);
-}
-
 .qr-img{
   width:300px;
   max-width:90%;
-
   border-radius:16px;
-
   margin-top:22px;
-
-  box-shadow:
-    0 0 30px rgba(0,207,255,.25);
-}
-
-/* LINKS */
-
-.link-box{
-  max-width:700px;
-  margin:0 auto;
-
-  background:var(--card);
-
-  border-radius:24px;
-
-  padding:30px 20px;
-
-  border:1px solid rgba(0,207,255,.25);
+  box-shadow:0 0 30px rgba(0,207,255,.25);
 }
 
 .link-btn{
   display:block;
-
   width:fit-content;
-
   margin:18px auto;
   padding:16px 28px;
-
   border-radius:999px;
-
   color:white;
   text-decoration:none;
   font-weight:bold;
-
   border:2px solid var(--blue);
-
-  box-shadow:
-    0 0 12px rgba(0,207,255,.15);
-
-  transition:.2s ease;
 }
 
-.link-btn:hover{
-  transform:scale(1.04);
+.cart{ margin-top:25px; }
 
-  background:#151515;
-
-  box-shadow:
-    0 0 18px rgba(0,207,255,.4);
+.cart-item{
+  margin:12px 0;
+  color:#ddd;
 }
 
-/* FOOTER */
+.total{
+  color:var(--green);
+  font-size:1.3rem;
+  font-weight:bold;
+  margin-top:15px;
+}
 
 footer{
   padding:40px 20px;
   color:#777;
   font-size:.9rem;
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="hero">
-
   <h1>Joe's Grows</h1>
-
-  <div class="tagline">
-    Rooting Deep • Harvesting Knowledge
-  </div>
-
-  <div class="motto">
-    Nugs Not Drugs
-  </div>
-
+  <div class="tagline">Rooting Deep • Harvesting Knowledge</div>
+  <div class="motto">Nugs Not Drugs</div>
 </div>
 
 <div class="nav">
-
   <a class="button" href="#about">About</a>
-
   <a class="button" href="#products">Products</a>
-
+  <a class="button" href="#cart">Cart</a>
   <a class="button" href="#worksheet">Worksheet</a>
-
   <a class="button" href="#links">Links</a>
-
 </div>
 
 <section class="section" id="about">
-
   <h2>About Joe's Grows</h2>
 
   <div class="qr-card">
-
     <p class="card-text">
-      Joe’s Grows is a cannabis cultivation channel focused on
-      sharing real-world grow knowledge, proven techniques,
-      and hands-on experience from seed to harvest.
+      Joe’s Grows is a cannabis cultivation channel focused on sharing real-world grow knowledge,
+      proven techniques, and hands-on experience from seed to harvest.
     </p>
 
-    <br>
-
     <p class="card-text">
-      Grow tips, tutorials, genetics, experiments,
-      reviews, and community grow-offs.
+      Grow tips, tutorials, genetics, experiments, reviews, and community grow-offs.
     </p>
-
   </div>
-
 </section>
 
 <section class="section" id="products">
-
   <h2>Products</h2>
 
-  <div class="card">
+  <div class="grid" id="productGrid"></div>
+</section>
 
-    <img
-      src="/images/bundle.jpg"
-      alt="Joe's Grows Shirt and Hat Bundle"
-      onerror="this.style.display='none'"
-    >
+<section class="section" id="cart">
+  <h2>Your Cart</h2>
 
-    <div class="card-title">
-      Joe's Grows Shirt + Hat Bundle
+  <div class="cart">
+    <div id="cartItems"></div>
+
+    <div class="total" id="cartTotal">
+      Total: $0
     </div>
 
-    <div class="card-text">
-      Official Joe’s Grows apparel bundle featuring
-      the “Nugs Not Drugs” shirt design with matching hat.
-    </div>
+    <br>
 
+    <button class="cart-btn" onclick="submitOrder()">
+      Submit Order By Email
+    </button>
   </div>
-
 </section>
 
 <section class="section" id="worksheet">
-
   <h2>Free Deficiency Cheat Sheet</h2>
 
   <div class="qr-card">
-
     <p class="card-text">
       Scan the QR code to grab the free cannabis deficiency worksheet.
     </p>
@@ -343,48 +240,137 @@ footer{
       alt="QR Code"
       class="qr-img"
     >
-
   </div>
-
 </section>
 
 <section class="section" id="links">
-
   <h2>Official Links</h2>
 
   <div class="link-box">
-
-    <a
-      class="link-btn"
-      href="https://youtube.com/@joesgrows?si=nBPybkPemlsRtrSo"
-      target="_blank"
-    >
+    <a class="link-btn" href="https://youtube.com/@joesgrows?si=nBPybkPemlsRtrSo" target="_blank">
       YouTube Channel
     </a>
 
-    <a
-      class="link-btn"
-      href="https://ko-fi.com/supportjoesgrows"
-      target="_blank"
-    >
+    <a class="link-btn" href="https://ko-fi.com/supportjoesgrows" target="_blank">
       Support Joe
     </a>
 
-    <a
-      class="link-btn"
-      href="https://beacons.ai/joesgrows"
-      target="_blank"
-    >
+    <a class="link-btn" href="https://beacons.ai/joesgrows" target="_blank">
       Gear & Affiliate Links
     </a>
-
   </div>
-
 </section>
 
 <footer>
   Joe's Grows • Real Grows • Real Results • Real Community
 </footer>
+
+<script>
+const products = [
+  {
+    code: "JG-01",
+    name: "Joe's Grows Shirt + Hat Bundle",
+    price: 50,
+    description: "Official Joe’s Grows apparel bundle featuring the Nugs Not Drugs shirt design with matching hat.",
+    image: "bundle.jpg"
+  },
+  {
+    code: "JG-02",
+    name: "Joe's Grows Exclusive Snapbacks",
+    price: 20,
+    description: "Exclusive Joe’s Grows snapbacks available in multiple styles.",
+    image: "hats.jpg"
+  }
+];
+
+let cart = [];
+
+const productGrid = document.getElementById("productGrid");
+
+products.forEach((product, index) => {
+  productGrid.innerHTML += `
+    <div class="card">
+      <img
+        src="/images/${product.image}"
+        alt="${product.name}"
+        onerror="this.style.display='none'"
+      >
+
+      <div class="card-title">${product.name}</div>
+
+      <div class="price">$${product.price}</div>
+
+      <div class="card-text">${product.description}</div>
+
+      <br>
+
+      <button class="cart-btn" onclick="addToCart(${index})">
+        Add To Cart
+      </button>
+    </div>
+  `;
+});
+
+function addToCart(index){
+  cart.push(products[index]);
+  renderCart();
+}
+
+function removeFromCart(index){
+  cart.splice(index, 1);
+  renderCart();
+}
+
+function renderCart(){
+  const cartItems = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
+
+  cartItems.innerHTML = "";
+
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price;
+
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        ${item.code} - ${item.name} - $${item.price}
+
+        <button class="cart-btn" onclick="removeFromCart(${index})">
+          Remove
+        </button>
+      </div>
+    `;
+  });
+
+  cartTotal.innerHTML = `Total: $${total}`;
+}
+
+function submitOrder(){
+  if(cart.length === 0){
+    alert("Cart is empty.");
+    return;
+  }
+
+  let total = 0;
+
+  let body = "Joe's Grows Order:%0D%0A%0D%0A";
+
+  cart.forEach(item => {
+    total += item.price;
+    body += `${item.code} - ${item.name} - $${item.price}%0D%0A`;
+  });
+
+  body += `%0D%0ATotal: $${total}%0D%0A%0D%0A`;
+  body += `Customer Name:%0D%0A`;
+  body += `Shipping Address:%0D%0A`;
+  body += `Email:%0D%0A`;
+  body += `Notes:%0D%0A`;
+
+  window.location.href =
+    `mailto:PUT-JOES-EMAIL-HERE?subject=Joe's Grows Order&body=${body}`;
+}
+</script>
 
 </body>
 </html>
