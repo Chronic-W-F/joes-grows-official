@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Joe's Grows</title>
+
+<style>
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #050505;
+  color: #f2f2f2;
+  text-align: center;
+}
+
+/* HEADER */
+
+h1 {
+  color: #39ff14;
+  font-size: 2.8rem;
+  margin: 25px 10px 5px;
+  text-shadow: 0 0 12px rgba(57,255,20,.55);
+}
+
+h2 {
+  color: #39ff14;
+  margin-top: 40px;
+  text-shadow: 0 0 8px rgba(57,255,20,.4);
+}
+
+.sub {
+  color: #bbb;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+/* NAV */
+
+.nav {
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.button {
+  display: inline-block;
+  margin: 6px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: white;
+  background: #111;
+  border: 1px solid #39ff14;
+  box-shadow: 0 0 10px rgba(57,255,20,.2);
+  font-weight: bold;
+  transition: .2s ease;
+}
+
+.button:hover {
+  transform: scale(1.03);
+  background: #1a1a1a;
+}
+
+/* HERO */
+
+.hero {
+  max-width: 850px;
+  margin: 25px auto;
+  padding: 20px;
+}
+
+.hero-text {
+  color: #ccc;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+/* SECTIONS */
+
+.section {
+  margin-top: 50px;
+  padding: 0 15px;
+}
+
+.box {
+  max-width: 850px;
+  margin: 20px auto;
+  border: 1px solid #222;
+  border-radius: 18px;
+  background: #101010;
+  padding: 25px;
+  box-shadow: 0 0 18px rgba(57,255,20,.08);
+}
+
+/* PRODUCTS */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  padding: 10px;
+}
+
+.card {
+  border: 1px solid #222;
+  border-radius: 16px;
+  background: #141414;
+  padding: 15px;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #39ff14;
+}
+
+.card-text {
+  color: #bbb;
+  font-size: .9rem;
+  margin-top: 8px;
+}
+
+/* QR */
+
+.qr {
+  width: 220px;
+  max-width: 90%;
+  border-radius: 14px;
+  border: 1px solid #333;
+  margin-top: 15px;
+}
+
+/* LINKS */
+
+.link-btn {
+  display: inline-block;
+  margin: 10px;
+  padding: 14px 18px;
+  border-radius: 999px;
+  background: #111;
+  color: white;
+  border: 1px solid #39ff14;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.link-btn:hover {
+  background: #1b1b1b;
+}
+
+/* FOOTER */
+
+footer {
+  margin-top: 60px;
+  padding: 30px 15px;
+  color: #777;
+  border-top: 1px solid #1a1a1a;
+  font-size: .85rem;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Joe's Grows</h1>
+
+<div class="sub">
+  Nugs Not Drugs
+</div>
+
+<div class="nav">
+
+  <a class="button" href="#about">About</a>
+
+  <a class="button" href="#products">Products</a>
+
+  <a class="button" href="#worksheet">Free Worksheet</a>
+
+  <a class="button" href="#links">Links</a>
+
+</div>
+
+<div class="hero">
+
+  <div class="hero-text">
+
+    Welcome to Joe’s Grows.
+
+    Real-world cannabis cultivation knowledge, grow tips,
+    tutorials, genetics, experiments, and community grow culture.
+
+    Built to help growers improve yields, grow smarter,
+    and gain confidence in the garden.
+
+  </div>
+
+</div>
+
+<div class="section" id="about">
+
+  <h2>About Joe's Grows</h2>
+
+  <div class="box">
+
+    <p>
+
+      Joe’s Grows is a cannabis cultivation channel focused on
+      sharing real-world grow knowledge, proven techniques,
+      and hands-on experience from seed to harvest.
+
+    </p>
+
+    <p>
+
+      Whether you're a beginner or experienced grower,
+      the goal is simple:
+
+      help growers learn, improve, and build community.
+
+    </p>
+
+    <p>
+
+      Rooting Deep • Harvesting Knowledge
+
+    </p>
+
+  </div>
+
+</div>
+
+<div class="section" id="products">
+
+  <h2>Featured Products</h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <img src="/images/corner-buddy.png">
+
+      <div class="card-title">
+        Grow Tent Corner Buddy
+      </div>
+
+      <div class="card-text">
+
+        3D printed grow tent accessories and organizers.
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <img src="/images/ai-art.png">
+
+      <div class="card-title">
+        AI Grow Art
+      </div>
+
+      <div class="card-text">
+
+        Custom AI-generated cannabis themed artwork and designs.
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="section" id="worksheet">
+
+  <h2>Free Deficiency Cheat Sheet</h2>
+
+  <div class="box">
+
+    <p>
+
+      Scan the QR code to grab the free cannabis deficiency worksheet.
+
+    </p>
+
+    <img
+      class="qr"
+      src="/images/worksheet-qr.png"
+      alt="QR Code"
+    >
+
+  </div>
+
+</div>
+
+<div class="section" id="links">
+
+  <h2>Official Links</h2>
+
+  <div class="box">
+
+    <a
+      class="link-btn"
+      href="https://youtube.com/@joesgrows?si=nBPybkPemlsRtrSo"
+      target="_blank"
+    >
+      YouTube Channel
+    </a>
+
+    <a
+      class="link-btn"
+      href="https://ko-fi.com/supportjoesgrows"
+      target="_blank"
+    >
+      Support Joe
+    </a>
+
+    <a
+      class="link-btn"
+      href="https://beacons.ai/joesgrows"
+      target="_blank"
+    >
+      Gear & Affiliate Links
+    </a>
+
+  </div>
+
+</div>
+
+<footer>
+
+  Joe's Grows<br>
+  Nugs Not Drugs
+
+</footer>
+
+</body>
+</html>
