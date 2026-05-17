@@ -71,7 +71,6 @@ h1{
 .cart-btn:hover{
   transform:scale(1.04);
   background:#181818;
-  box-shadow:0 0 16px rgba(0,207,255,.45),0 0 22px rgba(57,255,20,.18);
 }
 
 .section{ padding:20px 18px 45px; }
@@ -80,7 +79,6 @@ h1{
   color:var(--blue);
   font-size:2rem;
   margin-bottom:22px;
-  text-shadow:0 0 10px rgba(0,207,255,.3);
 }
 
 .grid{
@@ -130,12 +128,39 @@ h1{
   font-size:1.05rem;
 }
 
+.option-select{
+  width:90%;
+  max-width:280px;
+  padding:12px;
+  margin-top:15px;
+  border-radius:12px;
+  background:#050505;
+  color:white;
+  border:1px solid var(--blue);
+  font-weight:bold;
+}
+
+.gallery-strip{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin:15px 0;
+}
+
+.gallery-strip img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid rgba(0,207,255,.35);
+  cursor:pointer;
+}
+
 .qr-img{
   width:300px;
   max-width:90%;
   border-radius:16px;
   margin-top:22px;
-  box-shadow:0 0 30px rgba(0,207,255,.25);
 }
 
 .link-btn{
@@ -164,6 +189,34 @@ h1{
   margin-top:15px;
 }
 
+.modal{
+  display:none;
+  position:fixed;
+  z-index:999;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  padding:30px 15px;
+}
+
+.modal img{
+  max-width:95%;
+  max-height:75vh;
+  border-radius:18px;
+}
+
+.close-modal{
+  color:white;
+  font-size:2rem;
+  position:absolute;
+  right:25px;
+  top:15px;
+  cursor:pointer;
+}
+
+.modal-controls{
+  margin-top:18px;
+}
+
 footer{
   padding:40px 20px;
   color:#777;
@@ -190,13 +243,11 @@ footer{
 
 <section class="section" id="about">
   <h2>About Joe's Grows</h2>
-
   <div class="qr-card">
     <p class="card-text">
       Joe’s Grows is a cannabis cultivation channel focused on sharing real-world grow knowledge,
       proven techniques, and hands-on experience from seed to harvest.
     </p>
-
     <p class="card-text">
       Grow tips, tutorials, genetics, experiments, reviews, and community grow-offs.
     </p>
@@ -205,69 +256,49 @@ footer{
 
 <section class="section" id="products">
   <h2>Products</h2>
-
   <div class="grid" id="productGrid"></div>
 </section>
 
 <section class="section" id="cart">
   <h2>Your Cart</h2>
-
   <div class="cart">
     <div id="cartItems"></div>
-
-    <div class="total" id="cartTotal">
-      Total: $0
-    </div>
-
+    <div class="total" id="cartTotal">Total: $0</div>
     <br>
-
-    <button class="cart-btn" onclick="submitOrder()">
-      Submit Order By Email
-    </button>
+    <button class="cart-btn" onclick="submitOrder()">Submit Order By Email</button>
   </div>
 </section>
 
 <section class="section" id="worksheet">
   <h2>Free Deficiency Cheat Sheet</h2>
-
   <div class="qr-card">
-    <p class="card-text">
-      Scan the QR code to grab the free cannabis deficiency worksheet.
-    </p>
-
-    <img
-      src="/images/joe-qr.png"
-      alt="QR Code"
-      class="qr-img"
-    >
+    <p class="card-text">Scan the QR code to grab the free cannabis deficiency worksheet.</p>
+    <img src="/images/joe-qr.png" alt="QR Code" class="qr-img">
   </div>
 </section>
 
 <section class="section" id="links">
   <h2>Official Links</h2>
-
   <div class="link-box">
-    <a class="link-btn" href="https://youtube.com/@joesgrows?si=nBPybkPemlsRtrSo" target="_blank">
-      YouTube Channel
-    </a>
-
-    <a class="link-btn" href="https://ko-fi.com/supportjoesgrows" target="_blank">
-      Support Joe
-    </a>
-
-    <a class="link-btn" href="https://beacons.ai/joesgrows" target="_blank">
-      Gear & Affiliate Links
-    </a>
-
-    <a class="link-btn" href="mailto:joethegrowguy@gmail.com">
-      Contact Joe
-    </a>
+    <a class="link-btn" href="https://youtube.com/@joesgrows?si=nBPybkPemlsRtrSo" target="_blank">YouTube Channel</a>
+    <a class="link-btn" href="https://ko-fi.com/supportjoesgrows" target="_blank">Support Joe</a>
+    <a class="link-btn" href="https://beacons.ai/joesgrows" target="_blank">Gear & Affiliate Links</a>
+    <a class="link-btn" href="mailto:joethegrowguy@gmail.com">Contact Joe</a>
   </div>
 </section>
 
 <footer>
   Joe's Grows • Real Grows • Real Results • Real Community
 </footer>
+
+<div class="modal" id="galleryModal">
+  <span class="close-modal" onclick="closeGallery()">×</span>
+  <img id="modalImage" src="">
+  <div class="modal-controls">
+    <button class="cart-btn" onclick="prevImage()">Previous</button>
+    <button class="cart-btn" onclick="nextImage()">Next</button>
+  </div>
+</div>
 
 <script>
 const products = [
@@ -284,39 +315,87 @@ const products = [
     price: 20,
     description: "Exclusive Joe’s Grows snapbacks available in multiple styles.",
     image: "hats.jpg"
+  },
+  {
+    code: "JG-03",
+    name: "The Bud Buddy",
+    price: 25,
+    description: "Cannabis grow tent organizer shelf with built-in week tracker. Great for meters, tools, sprays, and small grow-room gear.",
+    image: "t-b-b-1.jpeg",
+    options: ["Green", "Red", "Blue", "White"],
+    gallery: [
+      "t-b-b-1.jpeg",
+      "t-b-b-2.jpeg",
+      "t-b-b-3.png",
+      "t-b-b-4.jpeg",
+      "t-b-b-white.jpeg",
+      "t-b-b-red.png",
+      "t-b-b-green.png",
+      "t-b-b-blue.png"
+    ]
   }
 ];
 
 let cart = [];
+let currentGallery = [];
+let currentImageIndex = 0;
 
 const productGrid = document.getElementById("productGrid");
 
 products.forEach((product, index) => {
+  const optionsBlock = product.options
+    ? `
+      <select class="option-select" id="option-${index}">
+        <option value="">Choose Color</option>
+        ${product.options.map(option => `<option value="${option}">${option}</option>`).join("")}
+      </select>
+    `
+    : "";
+
+  const galleryBlock = product.gallery
+    ? `
+      <div class="gallery-strip">
+        ${product.gallery.slice(0,4).map((img, imgIndex) => `
+          <img src="/images/${img}" onclick="openGallery(${index}, ${imgIndex})">
+        `).join("")}
+      </div>
+      <button class="cart-btn" onclick="openGallery(${index}, 0)">View Gallery</button>
+    `
+    : "";
+
   productGrid.innerHTML += `
     <div class="card">
-      <img
-        src="/images/${product.image}"
-        alt="${product.name}"
-        onerror="this.style.display='none'"
-      >
-
+      <img src="/images/${product.image}" alt="${product.name}" onerror="this.style.display='none'">
       <div class="card-title">${product.name}</div>
-
       <div class="price">$${product.price}</div>
-
       <div class="card-text">${product.description}</div>
-
-      <br>
-
-      <button class="cart-btn" onclick="addToCart(${index})">
-        Add To Cart
-      </button>
+      ${galleryBlock}
+      ${optionsBlock}
+      <br><br>
+      <button class="cart-btn" onclick="addToCart(${index})">Add To Cart</button>
     </div>
   `;
 });
 
 function addToCart(index){
-  cart.push(products[index]);
+  const product = products[index];
+  let selectedOption = "";
+
+  if(product.options){
+    const select = document.getElementById(`option-${index}`);
+    selectedOption = select.value;
+
+    if(!selectedOption){
+      alert("Please choose a color first.");
+      return;
+    }
+  }
+
+  cart.push({
+    ...product,
+    selectedOption
+  });
+
   renderCart();
 }
 
@@ -330,7 +409,6 @@ function renderCart(){
   const cartTotal = document.getElementById("cartTotal");
 
   cartItems.innerHTML = "";
-
   let total = 0;
 
   cart.forEach((item, index) => {
@@ -338,11 +416,8 @@ function renderCart(){
 
     cartItems.innerHTML += `
       <div class="cart-item">
-        ${item.code} - ${item.name} - $${item.price}
-
-        <button class="cart-btn" onclick="removeFromCart(${index})">
-          Remove
-        </button>
+        ${item.code} - ${item.name}${item.selectedOption ? " - Color: " + item.selectedOption : ""} - $${item.price}
+        <button class="cart-btn" onclick="removeFromCart(${index})">Remove</button>
       </div>
     `;
   });
@@ -357,15 +432,20 @@ function submitOrder(){
   }
 
   let total = 0;
-
   let body = "Joe's Grows Order:%0D%0A%0D%0A";
 
   cart.forEach(item => {
     total += item.price;
     body += `${item.code} - ${item.name} - $${item.price}%0D%0A`;
+
+    if(item.selectedOption){
+      body += `Color: ${item.selectedOption}%0D%0A`;
+    }
+
+    body += `%0D%0A`;
   });
 
-  body += `%0D%0ATotal: $${total}%0D%0A%0D%0A`;
+  body += `Total: $${total}%0D%0A%0D%0A`;
   body += `Customer Name:%0D%0A`;
   body += `Shipping Address:%0D%0A`;
   body += `Email:%0D%0A`;
@@ -373,6 +453,27 @@ function submitOrder(){
 
   window.location.href =
     `mailto:joethegrowguy@gmail.com?subject=Joe's Grows Order&body=${body}`;
+}
+
+function openGallery(productIndex, imageIndex){
+  currentGallery = products[productIndex].gallery;
+  currentImageIndex = imageIndex;
+  document.getElementById("modalImage").src = "/images/" + currentGallery[currentImageIndex];
+  document.getElementById("galleryModal").style.display = "block";
+}
+
+function closeGallery(){
+  document.getElementById("galleryModal").style.display = "none";
+}
+
+function nextImage(){
+  currentImageIndex = (currentImageIndex + 1) % currentGallery.length;
+  document.getElementById("modalImage").src = "/images/" + currentGallery[currentImageIndex];
+}
+
+function prevImage(){
+  currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length;
+  document.getElementById("modalImage").src = "/images/" + currentGallery[currentImageIndex];
 }
 </script>
 
