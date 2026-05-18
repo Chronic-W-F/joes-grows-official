@@ -167,6 +167,13 @@ header p {
   margin-bottom: 18px;
 }
 
+.option-label {
+  text-align: left;
+  color: #39ff14;
+  font-weight: bold;
+  margin: 14px 0 6px;
+}
+
 .option-select {
   width: 100%;
   padding: 12px;
@@ -192,6 +199,7 @@ header p {
   color: #39ff14;
   margin-bottom: 15px;
   min-height: 55px;
+  line-height: 1.5;
 }
 
 .cart-btn {
@@ -411,7 +419,7 @@ var products = [
     name: "Joe's Grows Hat Collection",
     price: 20,
     shippingFree: false,
-    description: "Choose from 16 available hat styles. Some preview images contain multiple hats.",
+    description: "Choose from 18 available hat styles. Some preview images contain multiple hats.",
     image: "joes-grows-black-hat.jpeg",
     gallery: [
       "joes-grows-black-hat.jpeg",
@@ -425,30 +433,80 @@ var products = [
       "og-emerald-hat.jpeg",
       "nugs-not-drugs-black-hat.jpeg",
       "solauto-black-hat.jpeg",
-      "solauto-cup-black-hat.jpeg"
+      "solauto-cup-black-hat.jpeg",
+      "nugs-not-drugs-snapback.jpeg",
+      "harvest-heroes-snapback.jpeg"
     ],
-    options: [
-      "Joe's Grows Black Hat",
-      "Seed 2 Smoke Podcast Black Hat",
-      "Joe's Grows Nugs Not Drugs Black Hat",
-      "Joe's Grows Pheno Hunter Green Hat",
-      "Joe's Grows Certified OG Black Hat",
-      "Ghost Cut Hat",
-      "Emerald Frost Hat",
-      "Midnight Resin Hat",
-      "Paper & Ash Hat",
-      "Smoke Show Hat",
-      "Gorilla Grow Hat",
-      "Harvest Hunter Hat",
-      "OG Emerald Hat",
-      "Nugs Not Drugs Black Hat",
-      "Solauto Black Hat",
-      "Solauto Cup Black Hat"
+    optionGroups: [
+      {
+        label: "Hat Style",
+        options: [
+          "Joe's Grows Black Hat",
+          "Seed 2 Smoke Podcast Black Hat",
+          "Joe's Grows Nugs Not Drugs Black Hat",
+          "Joe's Grows Pheno Hunter Green Hat",
+          "Joe's Grows Certified OG Black Hat",
+          "Ghost Cut Hat",
+          "Emerald Frost Hat",
+          "Midnight Resin Hat",
+          "Paper & Ash Hat",
+          "Smoke Show Hat",
+          "Gorilla Grow Hat",
+          "Harvest Hunter Hat",
+          "OG Emerald Hat",
+          "Nugs Not Drugs Black Hat",
+          "Solauto Black Hat",
+          "Solauto Cup Black Hat",
+          "Nugs Not Drugs Snapback",
+          "Harvest Heroes Snapback"
+        ]
+      }
     ],
     optionHelp: "Some photos show multiple hats. Choose the exact hat style before adding to cart."
   },
+
   {
     code: "JG-02",
+    name: "Joe's Grows Shirt Collection",
+    price: 25,
+    shippingFree: false,
+    description: "Choose from Joe’s official grower shirt designs. Select your design and shirt size before adding to cart.",
+    image: "got-cal-mag-shirt.jpeg",
+    gallery: [
+      "got-cal-mag-shirt.jpeg",
+      "lets-go-lets-grow-shirt.jpeg",
+      "harvest-heroes-shirt.jpeg",
+      "joes-grows-shirt.jpeg",
+      "nugs-not-drugs-shirt.jpeg"
+    ],
+    optionGroups: [
+      {
+        label: "Shirt Design",
+        options: [
+          "Got Cal Mag?",
+          "Let's Go Let's Grow",
+          "Harvest Heroes",
+          "Joe's Grows Logo Shirt",
+          "Nugs Not Drugs Shirt"
+        ]
+      },
+      {
+        label: "Shirt Size",
+        options: [
+          "Small",
+          "Medium",
+          "Large",
+          "XL",
+          "2XL",
+          "3XL"
+        ]
+      }
+    ],
+    optionHelp: "Select both the shirt design and size before adding to cart."
+  },
+
+  {
+    code: "JG-03",
     name: "The Bud Buddy",
     price: 35,
     shippingFree: true,
@@ -464,11 +522,16 @@ var products = [
       "t-b-b-green.png",
       "t-b-b-blue.png"
     ],
-    options: [
-      "White",
-      "Red",
-      "Green",
-      "Blue"
+    optionGroups: [
+      {
+        label: "Bud Buddy Color",
+        options: [
+          "White",
+          "Red",
+          "Green",
+          "Blue"
+        ]
+      }
     ],
     optionHelp: "The Bud Buddy is $35 with FREE shipping included."
   }
@@ -536,28 +599,35 @@ function buildProducts() {
     desc.textContent = product.description;
     content.appendChild(desc);
 
-    if (product.options && product.options.length > 0) {
-      var select = document.createElement("select");
-      select.className = "option-select";
-      select.id = "option-" + index;
+    if (product.optionGroups && product.optionGroups.length > 0) {
+      product.optionGroups.forEach(function(group, groupIndex) {
+        var label = document.createElement("div");
+        label.className = "option-label";
+        label.textContent = group.label;
+        content.appendChild(label);
 
-      var blank = document.createElement("option");
-      blank.value = "";
-      blank.textContent = "Select Option";
-      select.appendChild(blank);
+        var select = document.createElement("select");
+        select.className = "option-select";
+        select.id = "option-" + index + "-" + groupIndex;
 
-      product.options.forEach(function(optionText) {
-        var option = document.createElement("option");
-        option.value = optionText;
-        option.textContent = optionText;
-        select.appendChild(option);
+        var blank = document.createElement("option");
+        blank.value = "";
+        blank.textContent = "Select " + group.label;
+        select.appendChild(blank);
+
+        group.options.forEach(function(optionText) {
+          var option = document.createElement("option");
+          option.value = optionText;
+          option.textContent = optionText;
+          select.appendChild(option);
+        });
+
+        select.onchange = function() {
+          updateSelectionPreview(index);
+        };
+
+        content.appendChild(select);
       });
-
-      select.onchange = function() {
-        updateSelectionPreview(index);
-      };
-
-      content.appendChild(select);
 
       var help = document.createElement("div");
       help.className = "option-help";
@@ -584,40 +654,65 @@ function buildProducts() {
   });
 }
 
+function getSelectedOptions(index) {
+  var product = products[index];
+  var selections = [];
+
+  if (!product.optionGroups || product.optionGroups.length === 0) {
+    return selections;
+  }
+
+  product.optionGroups.forEach(function(group, groupIndex) {
+    var select = document.getElementById("option-" + index + "-" + groupIndex);
+
+    if (select && select.value !== "") {
+      selections.push({
+        label: group.label,
+        value: select.value
+      });
+    }
+  });
+
+  return selections;
+}
+
 function updateSelectionPreview(index) {
   var product = products[index];
-  var select = document.getElementById("option-" + index);
   var preview = document.getElementById("preview-" + index);
 
-  if (!select || !preview) {
+  if (!preview) {
     return;
   }
 
-  if (select.value === "") {
+  var selections = getSelectedOptions(index);
+
+  if (selections.length === 0) {
     preview.textContent = "Selection will appear here.";
     return;
   }
 
-  preview.innerHTML =
-    "Selected:<br><br><strong>" +
-    select.value +
-    "</strong><br>" +
-    (product.shippingFree ? "FREE shipping included" : "Shipping confirmed by Joe");
+  var html = "Selected:<br><br>";
+
+  selections.forEach(function(selection) {
+    html += "<strong>" + selection.label + ":</strong> " + selection.value + "<br>";
+  });
+
+  html += "<br>";
+  html += product.shippingFree ? "FREE shipping included" : "Shipping confirmed by Joe";
+
+  preview.innerHTML = html;
 }
 
 function addToCart(index) {
   var product = Object.assign({}, products[index]);
+  var selections = getSelectedOptions(index);
 
-  if (product.options && product.options.length > 0) {
-    var select = document.getElementById("option-" + index);
-
-    if (!select || select.value === "") {
-      alert("Please select an option.");
-      return;
-    }
-
-    product.selectedOption = select.value;
+  if (product.optionGroups && selections.length !== product.optionGroups.length) {
+    alert("Please complete all selections before adding to cart.");
+    return;
   }
+
+  product.selections = selections;
 
   cart.push(product);
   renderCart();
@@ -651,10 +746,18 @@ function renderCart() {
     var div = document.createElement("div");
     div.className = "cart-item";
 
+    var selectionsHTML = "";
+
+    if (item.selections && item.selections.length > 0) {
+      item.selections.forEach(function(selection) {
+        selectionsHTML += selection.label + ": <strong>" + selection.value + "</strong><br>";
+      });
+    }
+
     div.innerHTML =
       "<strong>" + item.code + "</strong><br>" +
       item.name + "<br>" +
-      (item.selectedOption ? "Selection: <strong>" + item.selectedOption + "</strong><br>" : "") +
+      selectionsHTML +
       "$" + item.price + "<br>" +
       (item.shippingFree ? "FREE shipping" : "Shipping confirmed by Joe") +
       "<br><br>";
@@ -675,7 +778,7 @@ function renderCart() {
   if (cart.length === 0) {
     shippingTotal.textContent = "Shipping: $0";
   } else if (hasManualShipping && hasFreeShipping) {
-    shippingTotal.textContent = "Shipping: The Bud Buddy includes FREE shipping. Hat shipping will be confirmed by Joe.";
+    shippingTotal.textContent = "Shipping: The Bud Buddy includes FREE shipping. Hat/shirt shipping will be confirmed by Joe.";
   } else if (hasManualShipping) {
     shippingTotal.textContent = "Shipping: Confirm with Joe.";
   } else {
@@ -697,8 +800,10 @@ function submitOrder() {
 
     body += item.code + " - " + item.name;
 
-    if (item.selectedOption) {
-      body += " - Selection: " + item.selectedOption;
+    if (item.selections && item.selections.length > 0) {
+      item.selections.forEach(function(selection) {
+        body += " - " + selection.label + ": " + selection.value;
+      });
     }
 
     body += " - $" + item.price;
