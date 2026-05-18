@@ -2,300 +2,301 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>Joe's Grows Swag</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+* {
+  box-sizing: border-box;
 }
 
-html{
-  scroll-behavior:smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-body{
-  background:#050505;
-  color:white;
-  font-family:Arial,sans-serif;
-  text-align:center;
+body {
+  margin: 0;
+  background: #050505;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
-header{
-  padding:34px 15px 24px;
-  background:#000;
-  border-bottom:2px solid #39ff14;
+header {
+  padding: 34px 15px 24px;
+  background: #000;
+  border-bottom: 2px solid #39ff14;
 }
 
-header h1{
-  color:#39ff14;
-  font-size:2.7rem;
-  text-shadow:0 0 15px #39ff14;
-  margin-bottom:10px;
+header h1 {
+  color: #39ff14;
+  font-size: 2.7rem;
+  text-shadow: 0 0 15px #39ff14;
+  margin: 0 0 10px;
 }
 
-header p{
-  color:#ccc;
-  font-size:1rem;
+header p {
+  color: #ccc;
+  font-size: 1rem;
+  margin: 0;
 }
 
-.motto{
-  margin-top:18px;
-  font-size:2rem;
-  font-weight:900;
-  color:#39ff14;
-  text-shadow:0 0 15px #39ff14;
+.motto {
+  margin-top: 18px;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #39ff14;
+  text-shadow: 0 0 15px #39ff14;
 }
 
-.nav{
-  padding:18px 10px;
-  background:#050505;
+.nav {
+  padding: 18px 10px;
+  background: #050505;
 }
 
-.nav a{
-  display:inline-block;
-  margin:6px;
-  padding:12px 17px;
-  border:1px solid #39ff14;
-  border-radius:999px;
-  color:white;
-  text-decoration:none;
-  font-weight:bold;
-  background:#111;
+.nav a {
+  display: inline-block;
+  margin: 7px;
+  padding: 13px 18px;
+  border: 1px solid #39ff14;
+  border-radius: 999px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  background: #111;
 }
 
-.container{
-  width:100%;
-  max-width:1400px;
-  margin:auto;
-  padding:20px;
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  padding: 20px;
 }
 
-.section{
-  margin:35px 0;
+.section {
+  margin: 35px 0;
 }
 
-.section-title{
-  font-size:2rem;
-  color:#39ff14;
-  text-align:center;
-  margin-bottom:25px;
-  text-shadow:0 0 10px #39ff14;
+.section-title {
+  font-size: 2rem;
+  color: #39ff14;
+  text-align: center;
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px #39ff14;
 }
 
-.info-box{
-  background:#111;
-  border:2px solid #222;
-  border-radius:20px;
-  padding:24px;
-  max-width:900px;
-  margin:auto;
-  color:#d6d6d6;
-  line-height:1.6;
+.info-box {
+  background: #111;
+  border: 2px solid #222;
+  border-radius: 20px;
+  padding: 24px;
+  max-width: 900px;
+  margin: auto;
+  color: #d6d6d6;
+  line-height: 1.6;
 }
 
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:25px;
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
 }
 
-.card{
-  background:#111;
-  border:2px solid #222;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 0 20px rgba(0,0,0,0.6);
+.card {
+  background: #111;
+  border: 2px solid #222;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
 }
 
-.main-product-img{
-  width:100%;
-  display:block;
-  border-bottom:2px solid #222;
+.main-product-img {
+  width: 100%;
+  display: block;
+  border-bottom: 2px solid #222;
 }
 
-.gallery{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  padding:12px;
-  background:#0d0d0d;
+.gallery {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 12px;
+  background: #0d0d0d;
 }
 
-.gallery img{
-  width:90px;
-  height:90px;
-  object-fit:cover;
-  border-radius:12px;
-  border:2px solid #222;
-  cursor:pointer;
+.gallery img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #222;
+  cursor: pointer;
+  flex: 0 0 auto;
 }
 
-.gallery img:hover{
-  border-color:#39ff14;
+.gallery img:hover {
+  border-color: #39ff14;
 }
 
-.card-content{
-  padding:20px;
+.card-content {
+  padding: 20px;
 }
 
-.card-title{
-  font-size:1.5rem;
-  margin-bottom:10px;
-  color:#39ff14;
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #39ff14;
 }
 
-.price{
-  font-size:1.3rem;
-  margin-bottom:15px;
-  font-weight:bold;
+.price {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  font-weight: bold;
 }
 
-.card-text{
-  color:#ccc;
-  line-height:1.5;
-  margin-bottom:18px;
+.shipping-note {
+  color: #39ff14;
+  font-weight: bold;
+  margin-bottom: 12px;
 }
 
-.shipping-note{
-  color:#39ff14;
-  font-weight:bold;
-  margin-bottom:12px;
+.card-text {
+  color: #ccc;
+  line-height: 1.5;
+  margin-bottom: 18px;
 }
 
-.option-select{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:none;
-  background:#1a1a1a;
-  color:white;
-  font-size:1rem;
-  margin-bottom:10px;
+.option-select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #1a1a1a;
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 10px;
 }
 
-.option-help{
-  color:#999;
-  font-size:.9rem;
-  margin-bottom:12px;
+.option-help {
+  color: #999;
+  font-size: .9rem;
+  margin-bottom: 12px;
 }
 
-.selection-preview{
-  background:#0d0d0d;
-  border:1px solid #39ff14;
-  border-radius:12px;
-  padding:12px;
-  color:#39ff14;
-  margin-bottom:15px;
-  min-height:60px;
+.selection-preview {
+  background: #0d0d0d;
+  border: 1px solid #39ff14;
+  border-radius: 12px;
+  padding: 12px;
+  color: #39ff14;
+  margin-bottom: 15px;
+  min-height: 55px;
 }
 
-.cart-btn{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:14px;
-  background:#39ff14;
-  color:black;
-  font-size:1rem;
-  font-weight:bold;
-  cursor:pointer;
+.cart-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: #39ff14;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.cart-section{
-  margin-top:50px;
-  background:#111;
-  border:2px solid #222;
-  border-radius:20px;
-  padding:25px;
+.cart-section {
+  margin-top: 50px;
+  background: #111;
+  border: 2px solid #222;
+  border-radius: 20px;
+  padding: 25px;
 }
 
-.cart-item{
-  padding:15px;
-  border-bottom:1px solid #222;
-  line-height:1.6;
+.cart-item {
+  padding: 15px;
+  border-bottom: 1px solid #222;
+  line-height: 1.6;
 }
 
-.cart-total{
-  margin-top:20px;
-  font-size:1.4rem;
-  color:#39ff14;
-  font-weight:bold;
+.cart-total {
+  margin-top: 20px;
+  font-size: 1.4rem;
+  color: #39ff14;
+  font-weight: bold;
 }
 
-.shipping-total{
-  margin-top:12px;
-  color:#ccc;
-  line-height:1.5;
+.shipping-total {
+  margin-top: 12px;
+  color: #ccc;
+  line-height: 1.5;
 }
 
-.submit-btn{
-  margin-top:20px;
-  width:100%;
-  padding:16px;
-  background:#39ff14;
-  color:black;
-  border:none;
-  border-radius:15px;
-  font-size:1.1rem;
-  font-weight:bold;
-  cursor:pointer;
+.submit-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 16px;
+  background: #39ff14;
+  color: black;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.qr-img{
-  width:320px;
-  max-width:95%;
-  margin-top:18px;
-  border-radius:14px;
+.qr-img {
+  width: 320px;
+  max-width: 95%;
+  margin-top: 18px;
+  border-radius: 14px;
 }
 
-.link-btn{
-  display:block;
-  width:fit-content;
-  margin:16px auto;
-  padding:14px 28px;
-  border:2px solid #39ff14;
-  border-radius:999px;
-  color:white;
-  text-decoration:none;
-  font-weight:bold;
+.link-btn {
+  display: block;
+  width: fit-content;
+  margin: 16px auto;
+  padding: 14px 28px;
+  border: 2px solid #39ff14;
+  border-radius: 999px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.lightbox{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.9);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:999;
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
-.lightbox.active{
-  display:flex;
+.lightbox.active {
+  display: flex;
 }
 
-.lightbox img{
-  max-width:90%;
-  max-height:90%;
-  border-radius:20px;
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 20px;
 }
 
-.close-lightbox{
-  position:absolute;
-  top:20px;
-  right:20px;
-  color:white;
-  font-size:2rem;
-  cursor:pointer;
+.close-lightbox {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
 }
 
-footer{
-  padding:40px 20px;
-  color:#777;
+footer {
+  padding: 40px 20px;
+  color: #777;
 }
 </style>
 </head>
@@ -319,4 +320,419 @@ footer{
 <div class="container">
 
   <section class="section" id="about">
-    <div class="section-title">About Joe's Grows</div
+    <div class="section-title">About Joe's Grows</div>
+
+    <div class="info-box">
+      <p>
+        Joe’s Grows is a cannabis cultivation channel focused on sharing real-world grow knowledge,
+        proven techniques, and hands-on experience from seed to harvest.
+      </p>
+      <br>
+      <p>
+        On this channel you’ll find cannabis grow tips and techniques, step-by-step grow tutorials,
+        genetics, training methods, experiments, community grow-offs, reviews, and real results.
+      </p>
+      <br>
+      <p>
+        Joe’s Grows is about education, consistency, and building a strong grower community.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="products">
+    <div class="section-title">Featured Products</div>
+    <div class="product-grid" id="productGrid"></div>
+  </section>
+
+  <section class="section" id="cart">
+    <div class="cart-section">
+      <div class="section-title">Cart</div>
+      <div id="cartItems"></div>
+
+      <div class="cart-total" id="cartTotal">Subtotal: $0</div>
+      <div class="shipping-total" id="shippingTotal">Shipping: $0</div>
+
+      <button class="submit-btn" onclick="submitOrder()">Submit Order By Email</button>
+    </div>
+  </section>
+
+  <section class="section" id="worksheet">
+    <div class="section-title">Free Deficiency Cheat Sheet</div>
+
+    <div class="info-box">
+      <p>Scan the QR code below to access Joe’s free cannabis deficiency worksheet.</p>
+
+      <img
+        src="/images/joe-qr.png"
+        class="qr-img"
+        alt="Joe's Grows QR Code"
+        onerror="this.style.display='none'"
+      >
+    </div>
+  </section>
+
+  <section class="section" id="links">
+    <div class="section-title">Official Links</div>
+
+    <div class="info-box">
+      <a class="link-btn" href="https://youtube.com/@joesgrows?si=nBPybkPemlsRtrSo" target="_blank">
+        YouTube Channel
+      </a>
+
+      <a class="link-btn" href="https://ko-fi.com/supportjoesgrows" target="_blank">
+        Support Joe
+      </a>
+
+      <a class="link-btn" href="https://beacons.ai/joesgrows" target="_blank">
+        Gear & Affiliate Links
+      </a>
+
+      <a class="link-btn" href="mailto:joethegrowguy@gmail.com">
+        Contact Joe
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Joe's Grows • Real Grows • Real Results • Real Community
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="close-lightbox" onclick="closeLightbox()">✕</div>
+  <img id="lightboxImg" alt="">
+</div>
+
+<script>
+var products = [
+  {
+    code: "JG-01",
+    name: "Joe's Grows Hat Collection",
+    price: 20,
+    shippingFree: false,
+    description: "Choose from 16 available hat styles. Some preview images contain multiple hats.",
+    image: "joes-grows-black-hat.jpeg",
+    gallery: [
+      "joes-grows-black-hat.jpeg",
+      "seed-2-smoke-podcast-black-hat.jpeg",
+      "joes-grows-nugs-not-drugs-black-hat.jpeg",
+      "joes-grows-pheno-hunter-green-hat.jpeg",
+      "joes-grows-certified-og-black-hat.jpeg",
+      "ghost-cut-emerald-frost-hats.jpeg",
+      "midnight-resin-paper-and-ash-smoke-show-hats.jpeg",
+      "gorilla-grow-harvest-hunter-hats.jpeg",
+      "og-emerald-hat.jpeg",
+      "nugs-not-drugs-black-hat.jpeg",
+      "solauto-black-hat.jpeg",
+      "solauto-cup-black-hat.jpeg"
+    ],
+    options: [
+      "Joe's Grows Black Hat",
+      "Seed 2 Smoke Podcast Black Hat",
+      "Joe's Grows Nugs Not Drugs Black Hat",
+      "Joe's Grows Pheno Hunter Green Hat",
+      "Joe's Grows Certified OG Black Hat",
+      "Ghost Cut Hat",
+      "Emerald Frost Hat",
+      "Midnight Resin Hat",
+      "Paper & Ash Hat",
+      "Smoke Show Hat",
+      "Gorilla Grow Hat",
+      "Harvest Hunter Hat",
+      "OG Emerald Hat",
+      "Nugs Not Drugs Black Hat",
+      "Solauto Black Hat",
+      "Solauto Cup Black Hat"
+    ],
+    optionHelp: "Some photos show multiple hats. Choose the exact hat style before adding to cart."
+  },
+  {
+    code: "JG-02",
+    name: "The Bud Buddy",
+    price: 35,
+    shippingFree: true,
+    description: "Cannabis grow tent organizer shelf with built-in week tracker. Great for meters, tools, sprays, and small grow-room gear.",
+    image: "t-b-b-white.jpeg",
+    gallery: [
+      "t-b-b-1.jpeg",
+      "t-b-b-2.jpeg",
+      "t-b-b-3.png",
+      "t-b-b-4.jpeg",
+      "t-b-b-white.jpeg",
+      "t-b-b-red.png",
+      "t-b-b-green.png",
+      "t-b-b-blue.png"
+    ],
+    options: [
+      "White",
+      "Red",
+      "Green",
+      "Blue"
+    ],
+    optionHelp: "The Bud Buddy is $35 with FREE shipping included."
+  }
+];
+
+var cart = [];
+
+function buildProducts() {
+  var productGrid = document.getElementById("productGrid");
+  productGrid.innerHTML = "";
+
+  products.forEach(function(product, index) {
+    var card = document.createElement("div");
+    card.className = "card";
+
+    var mainImg = document.createElement("img");
+    mainImg.className = "main-product-img";
+    mainImg.src = "/images/" + product.image;
+    mainImg.alt = product.name;
+    mainImg.onerror = function() {
+      this.style.display = "none";
+    };
+    card.appendChild(mainImg);
+
+    if (product.gallery && product.gallery.length > 0) {
+      var gallery = document.createElement("div");
+      gallery.className = "gallery";
+
+      product.gallery.forEach(function(imgName) {
+        var thumb = document.createElement("img");
+        thumb.src = "/images/" + imgName;
+        thumb.alt = imgName;
+        thumb.onclick = function() {
+          openLightbox("/images/" + imgName);
+        };
+        thumb.onerror = function() {
+          this.style.display = "none";
+        };
+        gallery.appendChild(thumb);
+      });
+
+      card.appendChild(gallery);
+    }
+
+    var content = document.createElement("div");
+    content.className = "card-content";
+
+    var title = document.createElement("div");
+    title.className = "card-title";
+    title.textContent = product.name;
+    content.appendChild(title);
+
+    var price = document.createElement("div");
+    price.className = "price";
+    price.textContent = "$" + product.price;
+    content.appendChild(price);
+
+    var ship = document.createElement("div");
+    ship.className = "shipping-note";
+    ship.textContent = product.shippingFree ? "FREE shipping included" : "Shipping confirmed by Joe";
+    content.appendChild(ship);
+
+    var desc = document.createElement("div");
+    desc.className = "card-text";
+    desc.textContent = product.description;
+    content.appendChild(desc);
+
+    if (product.options && product.options.length > 0) {
+      var select = document.createElement("select");
+      select.className = "option-select";
+      select.id = "option-" + index;
+
+      var blank = document.createElement("option");
+      blank.value = "";
+      blank.textContent = "Select Option";
+      select.appendChild(blank);
+
+      product.options.forEach(function(optionText) {
+        var option = document.createElement("option");
+        option.value = optionText;
+        option.textContent = optionText;
+        select.appendChild(option);
+      });
+
+      select.onchange = function() {
+        updateSelectionPreview(index);
+      };
+
+      content.appendChild(select);
+
+      var help = document.createElement("div");
+      help.className = "option-help";
+      help.textContent = product.optionHelp || "Choose your exact option before adding to cart.";
+      content.appendChild(help);
+
+      var preview = document.createElement("div");
+      preview.className = "selection-preview";
+      preview.id = "preview-" + index;
+      preview.textContent = "Selection will appear here.";
+      content.appendChild(preview);
+    }
+
+    var button = document.createElement("button");
+    button.className = "cart-btn";
+    button.textContent = "Add To Cart";
+    button.onclick = function() {
+      addToCart(index);
+    };
+    content.appendChild(button);
+
+    card.appendChild(content);
+    productGrid.appendChild(card);
+  });
+}
+
+function updateSelectionPreview(index) {
+  var product = products[index];
+  var select = document.getElementById("option-" + index);
+  var preview = document.getElementById("preview-" + index);
+
+  if (!select || !preview) {
+    return;
+  }
+
+  if (select.value === "") {
+    preview.textContent = "Selection will appear here.";
+    return;
+  }
+
+  preview.innerHTML =
+    "Selected:<br><br><strong>" +
+    select.value +
+    "</strong><br>" +
+    (product.shippingFree ? "FREE shipping included" : "Shipping confirmed by Joe");
+}
+
+function addToCart(index) {
+  var product = Object.assign({}, products[index]);
+
+  if (product.options && product.options.length > 0) {
+    var select = document.getElementById("option-" + index);
+
+    if (!select || select.value === "") {
+      alert("Please select an option.");
+      return;
+    }
+
+    product.selectedOption = select.value;
+  }
+
+  cart.push(product);
+  renderCart();
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  renderCart();
+}
+
+function renderCart() {
+  var cartItems = document.getElementById("cartItems");
+  var cartTotal = document.getElementById("cartTotal");
+  var shippingTotal = document.getElementById("shippingTotal");
+
+  cartItems.innerHTML = "";
+
+  var subtotal = 0;
+  var hasManualShipping = false;
+  var hasFreeShipping = false;
+
+  cart.forEach(function(item, index) {
+    subtotal += item.price;
+
+    if (item.shippingFree) {
+      hasFreeShipping = true;
+    } else {
+      hasManualShipping = true;
+    }
+
+    var div = document.createElement("div");
+    div.className = "cart-item";
+
+    div.innerHTML =
+      "<strong>" + item.code + "</strong><br>" +
+      item.name + "<br>" +
+      (item.selectedOption ? "Selection: <strong>" + item.selectedOption + "</strong><br>" : "") +
+      "$" + item.price + "<br>" +
+      (item.shippingFree ? "FREE shipping" : "Shipping confirmed by Joe") +
+      "<br><br>";
+
+    var removeButton = document.createElement("button");
+    removeButton.className = "cart-btn";
+    removeButton.textContent = "Remove";
+    removeButton.onclick = function() {
+      removeFromCart(index);
+    };
+
+    div.appendChild(removeButton);
+    cartItems.appendChild(div);
+  });
+
+  cartTotal.textContent = "Subtotal: $" + subtotal;
+
+  if (cart.length === 0) {
+    shippingTotal.textContent = "Shipping: $0";
+  } else if (hasManualShipping && hasFreeShipping) {
+    shippingTotal.textContent = "Shipping: The Bud Buddy includes FREE shipping. Hat shipping will be confirmed by Joe.";
+  } else if (hasManualShipping) {
+    shippingTotal.textContent = "Shipping: Confirm with Joe.";
+  } else {
+    shippingTotal.textContent = "Shipping: FREE";
+  }
+}
+
+function submitOrder() {
+  if (cart.length === 0) {
+    alert("Cart is empty.");
+    return;
+  }
+
+  var subtotal = 0;
+  var body = "Joe's Grows Order:%0D%0A%0D%0A";
+
+  cart.forEach(function(item) {
+    subtotal += item.price;
+
+    body += item.code + " - " + item.name;
+
+    if (item.selectedOption) {
+      body += " - Selection: " + item.selectedOption;
+    }
+
+    body += " - $" + item.price;
+
+    if (item.shippingFree) {
+      body += " - FREE shipping";
+    } else {
+      body += " - Shipping confirmed by Joe";
+    }
+
+    body += "%0D%0A";
+  });
+
+  body += "%0D%0ASubtotal: $" + subtotal + "%0D%0A";
+  body += "%0D%0ACustomer Name:%0D%0A";
+  body += "Shipping Address:%0D%0A";
+  body += "Email:%0D%0A";
+  body += "Notes:%0D%0A";
+
+  window.location.href =
+    "mailto:joethegrowguy@gmail.com?subject=Joe's Grows Order&body=" + body;
+}
+
+function openLightbox(src) {
+  document.getElementById("lightboxImg").src = src;
+  document.getElementById("lightbox").classList.add("active");
+}
+
+function closeLightbox() {
+  document.getElementById("lightbox").classList.remove("active");
+}
+
+document.addEventListener("DOMContentLoaded", buildProducts);
+</script>
+
+</body>
+</html>
