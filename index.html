@@ -2,24 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Joe's Grows</title>
 
 <style>
+
 :root{
   --bg:#050505;
-  --card:#101114;
-  --card2:#15171b;
+  --card:#111315;
   --blue:#00cfff;
-  --blueGlow:rgba(0,207,255,.45);
   --green:#39ff14;
-  --greenGlow:rgba(57,255,20,.25);
-  --text:#f2f2f2;
-  --muted:#bdbdbd;
+  --text:#f5f5f5;
 }
 
-html{ scroll-behavior:smooth; }
+html{
+  scroll-behavior:smooth;
+}
 
 body{
   margin:0;
@@ -29,26 +28,705 @@ body{
   text-align:center;
 }
 
-.hero{ padding:60px 20px 40px; }
+.hero{
+  padding:60px 20px 40px;
+}
 
 h1{
   margin:0;
   font-size:3rem;
   color:var(--blue);
-  text-shadow:0 0 10px var(--blueGlow),0 0 25px var(--blueGlow);
+  text-shadow:0 0 12px rgba(0,207,255,.5);
 }
 
 .tagline{
   margin-top:12px;
-  color:var(--muted);
-  font-size:1.05rem;
+  color:#cfcfcf;
 }
 
 .motto{
-  margin-top:22px;
+  margin-top:18px;
   font-size:2rem;
   font-weight:900;
-  letter-spacing:2px;
-  text-transform:uppercase;
   color:var(--green);
-  text-shadow:0 0 10px var(--greenGlow),0 0
+  text-shadow:0 0 12px rgba(57,255,20,.5);
+}
+
+.nav{
+  padding:10px 15px 35px;
+}
+
+.button,
+.cart-btn{
+  display:inline-block;
+  margin:6px;
+  padding:12px 18px;
+  border-radius:999px;
+  background:#111;
+  border:1px solid var(--blue);
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.section{
+  padding:20px 18px 50px;
+}
+
+.section h2{
+  color:var(--blue);
+  margin-bottom:25px;
+  font-size:2rem;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:22px;
+  max-width:1250px;
+  margin:0 auto;
+}
+
+.card,
+.cart,
+.info-box{
+  background:var(--card);
+  border-radius:24px;
+  padding:22px;
+  border:1px solid rgba(0,207,255,.2);
+  box-shadow:0 0 18px rgba(0,207,255,.08);
+}
+
+.main-product-img{
+  width:100%;
+  border-radius:18px;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:14px;
+}
+
+.gallery img{
+  width:100%;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.card-title{
+  margin-top:18px;
+  color:var(--blue);
+  font-size:1.5rem;
+  font-weight:900;
+}
+
+.price{
+  color:var(--green);
+  font-size:1.2rem;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.card-text{
+  color:#d6d6d6;
+  line-height:1.6;
+  margin-top:14px;
+}
+
+.option-select{
+  width:100%;
+  padding:14px;
+  margin-top:16px;
+  border-radius:12px;
+  background:#070707;
+  color:white;
+  border:1px solid rgba(0,207,255,.3);
+  font-size:1rem;
+}
+
+.option-help{
+  margin-top:10px;
+  color:#9f9f9f;
+  font-size:.9rem;
+}
+
+.selection-preview{
+  margin-top:12px;
+  background:#181818;
+  border-radius:12px;
+  padding:12px;
+  color:#d8ffd2;
+  font-size:.95rem;
+}
+
+.cart{
+  max-width:900px;
+  margin:0 auto;
+}
+
+.cart-item{
+  margin:12px 0;
+  line-height:1.6;
+}
+
+.total{
+  margin-top:16px;
+  color:var(--green);
+  font-size:1.3rem;
+  font-weight:bold;
+}
+
+.qr-img{
+  width:300px;
+  max-width:90%;
+  margin-top:20px;
+  border-radius:18px;
+}
+
+.link-btn{
+  display:block;
+  width:fit-content;
+  margin:16px auto;
+  padding:15px 28px;
+  border-radius:999px;
+  border:2px solid var(--blue);
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.lightbox{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  z-index:9999;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.lightbox img{
+  max-width:95%;
+  max-height:90vh;
+  border-radius:14px;
+}
+
+.lightbox.active{
+  display:flex;
+}
+
+.close-lightbox{
+  position:absolute;
+  top:20px;
+  right:25px;
+  color:white;
+  font-size:2rem;
+  cursor:pointer;
+}
+
+footer{
+  padding:40px 20px;
+  color:#777;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+
+  <h1>Joe's Grows</h1>
+
+  <div class="tagline">
+    Rooting Deep • Harvesting Knowledge
+  </div>
+
+  <div class="motto">
+    NUGS NOT DRUGS
+  </div>
+
+</div>
+
+<div class="nav">
+  <a class="button" href="#products">Products</a>
+  <a class="button" href="#cart">Cart</a>
+  <a class="button" href="#worksheet">Worksheet</a>
+  <a class="button" href="#links">Links</a>
+</div>
+
+<section class="section" id="products">
+
+  <h2>Products</h2>
+
+  <div class="grid" id="productGrid"></div>
+
+</section>
+
+<section class="section" id="cart">
+
+  <h2>Your Cart</h2>
+
+  <div class="cart">
+
+    <div id="cartItems"></div>
+
+    <div class="total" id="cartTotal">
+      Subtotal: $0
+    </div>
+
+    <br>
+
+    <button class="cart-btn" onclick="submitOrder()">
+      Submit Order By Email
+    </button>
+
+  </div>
+
+</section>
+
+<section class="section" id="worksheet">
+
+  <h2>Free Deficiency Cheat Sheet</h2>
+
+  <div class="info-box">
+
+    <p>
+      Scan the QR code below to access the free deficiency worksheet.
+    </p>
+
+    <img
+      src="/images/joe-qr.png"
+      class="qr-img"
+      alt="QR Code"
+    >
+
+  </div>
+
+</section>
+
+<section class="section" id="links">
+
+  <h2>Official Links</h2>
+
+  <div class="info-box">
+
+    <a class="link-btn"
+    href="https://youtube.com/@joesgrows?si=nBPybkPemlsRtrSo"
+    target="_blank">
+
+      YouTube Channel
+
+    </a>
+
+    <a class="link-btn"
+    href="https://ko-fi.com/supportjoesgrows"
+    target="_blank">
+
+      Support Joe
+
+    </a>
+
+    <a class="link-btn"
+    href="https://beacons.ai/joesgrows"
+    target="_blank">
+
+      Gear & Affiliate Links
+
+    </a>
+
+    <a class="link-btn"
+    href="mailto:joethegrowguy@gmail.com">
+
+      Contact Joe
+
+    </a>
+
+  </div>
+
+</section>
+
+<footer>
+  Joe's Grows • Real Grows • Real Results
+</footer>
+
+<div class="lightbox" id="lightbox">
+
+  <span
+  class="close-lightbox"
+  onclick="closeLightbox()">
+
+    ×
+
+  </span>
+
+  <img id="lightboxImg" src="">
+
+</div>
+
+<script>
+
+const products = [
+
+{
+  code:"JG-01",
+
+  name:"Joe's Grows Shirt + Hat Bundle",
+
+  price:50,
+
+  description:"Official Joe’s Grows apparel bundle featuring the Nugs Not Drugs shirt design with matching hat.",
+
+  image:"bundle.jpg"
+},
+
+{
+  code:"JG-02",
+
+  name:"Joe's Grows Hat Collection",
+
+  price:20,
+
+  description:"Choose from 16 available hat styles. Some photos contain multiple hats.",
+
+  image:"joes-grows-black-hat.jpeg",
+
+  gallery:[
+    "joes-grows-black-hat.jpeg",
+    "seed-2-smoke-podcast-black-hat.jpeg",
+    "joes-grows-nugs-not-drugs-black-hat.jpeg",
+    "joes-grows-pheno-hunter-green-hat.jpeg",
+    "joes-grows-certified-og-black-hat.jpeg",
+    "ghost-cut-emerald-frost-hats.jpeg",
+    "midnight-resin-paper-and-ash-smoke-show-hats.jpeg",
+    "gorilla-grow-harvest-hunter-hats.jpeg",
+    "og-emerald-hat.jpeg",
+    "nugs-not-drugs-black-hat.jpeg",
+    "solauto-black-hat.jpeg",
+    "solauto-cup-black-hat.jpeg"
+  ],
+
+  options:[
+    "Joe's Grows Black Hat",
+    "Seed 2 Smoke Podcast Black Hat",
+    "Joe's Grows Nugs Not Drugs Black Hat",
+    "Joe's Grows Pheno Hunter Green Hat",
+    "Joe's Grows Certified OG Black Hat",
+    "Ghost Cut Hat",
+    "Emerald Frost Hat",
+    "Midnight Resin Hat",
+    "Paper & Ash Hat",
+    "Smoke Show Hat",
+    "Gorilla Grow Hat",
+    "Harvest Hunter Hat",
+    "OG Emerald Hat",
+    "Nugs Not Drugs Black Hat",
+    "Solauto Black Hat",
+    "Solauto Cup Black Hat"
+  ]
+},
+
+{
+  code:"JG-03",
+
+  name:"The Bud Buddy",
+
+  price:35,
+
+  description:"Cannabis grow tent organizer shelf with built-in week tracker.",
+
+  image:"t-b-b-white.jpeg",
+
+  gallery:[
+    "t-b-b-1.jpeg",
+    "t-b-b-2.jpeg",
+    "t-b-b-3.png",
+    "t-b-b-4.jpeg",
+    "t-b-b-white.jpeg",
+    "t-b-b-red.png",
+    "t-b-b-green.png",
+    "t-b-b-blue.png"
+  ],
+
+  options:[
+    "White",
+    "Red",
+    "Green",
+    "Blue"
+  ]
+}
+
+];
+
+let cart = [];
+
+const productGrid =
+document.getElementById("productGrid");
+
+products.forEach((product,index)=>{
+
+let galleryHTML = "";
+
+if(product.gallery){
+
+galleryHTML = `
+<div class="gallery">
+
+${product.gallery.map(img => `
+
+<img
+src="/images/${img}"
+onclick="openLightbox('/images/${img}')"
+onerror="this.style.display='none'"
+>
+
+`).join("")}
+
+</div>
+`;
+}
+
+let optionHTML = "";
+
+if(product.options){
+
+optionHTML = `
+
+<select
+class="option-select"
+id="option-${index}"
+onchange="updateSelectionPreview(${index})">
+
+<option value="">
+Select Option
+</option>
+
+${product.options.map(option => `
+
+<option value="${option}">
+${option}
+</option>
+
+`).join("")}
+
+</select>
+
+<div class="option-help">
+Choose your exact style before adding to cart.
+</div>
+
+<div
+class="selection-preview"
+id="preview-${index}">
+
+Selection will appear here.
+
+</div>
+
+`;
+}
+
+productGrid.innerHTML += `
+
+<div class="card">
+
+<img
+class="main-product-img"
+src="/images/${product.image}"
+alt="${product.name}"
+onerror="this.style.display='none'"
+>
+
+${galleryHTML}
+
+<div class="card-title">
+${product.name}
+</div>
+
+<div class="price">
+$${product.price}
+</div>
+
+<div class="card-text">
+${product.description}
+</div>
+
+${optionHTML}
+
+<br>
+
+<button
+class="cart-btn"
+onclick="addToCart(${index})">
+
+Add To Cart
+
+</button>
+
+</div>
+
+`;
+});
+
+function updateSelectionPreview(index){
+
+const select =
+document.getElementById(`option-${index}`);
+
+const preview =
+document.getElementById(`preview-${index}`);
+
+if(select.value === ""){
+
+preview.innerHTML =
+"Selection will appear here.";
+
+return;
+}
+
+preview.innerHTML = `
+Selected:<br><br>
+<strong>${select.value}</strong>
+`;
+}
+
+function addToCart(index){
+
+const product = {...products[index]};
+
+if(product.options){
+
+const selectedOption =
+document.getElementById(`option-${index}`).value;
+
+if(selectedOption === ""){
+
+alert("Please select an option.");
+
+return;
+}
+
+product.selectedOption = selectedOption;
+}
+
+cart.push(product);
+
+renderCart();
+}
+
+function removeFromCart(index){
+
+cart.splice(index,1);
+
+renderCart();
+}
+
+function renderCart(){
+
+const cartItems =
+document.getElementById("cartItems");
+
+const cartTotal =
+document.getElementById("cartTotal");
+
+cartItems.innerHTML = "";
+
+let subtotal = 0;
+
+cart.forEach((item,index)=>{
+
+subtotal += item.price;
+
+cartItems.innerHTML += `
+
+<div class="cart-item">
+
+${item.code}
+-
+${item.name}
+
+${item.selectedOption ? `
+<br>
+Selection:
+${item.selectedOption}
+` : ""}
+
+<br>
+$${item.price}
+
+<br><br>
+
+<button
+class="cart-btn"
+onclick="removeFromCart(${index})">
+
+Remove
+
+</button>
+
+</div>
+
+`;
+});
+
+cartTotal.innerHTML =
+`Subtotal: $${subtotal}`;
+}
+
+function submitOrder(){
+
+if(cart.length === 0){
+
+alert("Cart is empty.");
+
+return;
+}
+
+let body =
+"Joe's Grows Order:%0D%0A%0D%0A";
+
+cart.forEach(item => {
+
+body += `${item.code} - ${item.name}`;
+
+if(item.selectedOption){
+
+body += ` - ${item.selectedOption}`;
+}
+
+body += ` - $${item.price}%0D%0A`;
+});
+
+body += `%0D%0A`;
+body += `Customer Name:%0D%0A`;
+body += `Shipping Address:%0D%0A`;
+body += `Email:%0D%0A`;
+
+window.location.href =
+`mailto:joethegrowguy@gmail.com?subject=Joe's Grows Order&body=${body}`;
+}
+
+function openLightbox(src){
+
+document.getElementById("lightboxImg").src = src;
+
+document
+.getElementById("lightbox")
+.classList.add("active");
+}
+
+function closeLightbox(){
+
+document
+.getElementById("lightbox")
+.classList.remove("active");
+}
+
+</script>
+
+</body>
+</html>
