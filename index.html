@@ -1,3 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Joe's Grows Swag</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#050505;
+  color:white;
+  font-family:Arial,sans-serif;
+}
+
+header{
+  text-align:center;
+  padding:30px 15px 20px;
+  background:#000;
+  border-bottom:2px solid #39ff14;
+}
+
+header h1{
+  color:#39ff14;
+  font-size:2.7rem;
+  text-shadow:0 0 15px #39ff14;
+  margin-bottom:10px;
+}
+
+header p{
+  color:#ccc;
+  font-size:1rem;
+}
+
+.container{
+  width:100%;
+  max-width:1400px;
+  margin:auto;
+  padding:20px;
+}
+
+.section-title{
+  font-size:2rem;
+  color:#39ff14;
+  text-align:center;
+  margin-bottom:25px;
+  text-shadow:0 0 10px #39ff14;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:25px;
+}
+
+.card{
+  background:#111;
+  border:2px solid #222;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 20px rgba(0,0,0,0.6);
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border-color:#39ff14;
+  box-shadow:0 0 25px rgba(57,255,20,0.4);
+}
+
+.main-product-img{
+  width:100%;
+  display:block;
+  border-bottom:2px solid #222;
+}
+
+.gallery{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:12px;
+  background:#0d0d0d;
+}
+
+.gallery img{
+  width:90px;
+  height:90px;
+  object-fit:cover;
+  border-radius:12px;
+  border:2px solid #222;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.gallery img:hover{
+  border-color:#39ff14;
+  transform:scale(1.05);
+}
+
+.card-content{
+  padding:20px;
+}
+
+.card-title{
+  font-size:1.5rem;
+  margin-bottom:10px;
+  color:#39ff14;
+}
+
+.price{
+  font-size:1.3rem;
+  margin-bottom:15px;
+  font-weight:bold;
+}
+
+.card-text{
+  color:#ccc;
+  line-height:1.5;
+  margin-bottom:18px;
+}
+
+.option-select{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  background:#1a1a1a;
+  color:white;
+  font-size:1rem;
+  margin-bottom:10px;
+}
+
+.option-help{
+  color:#999;
+  font-size:.9rem;
+  margin-bottom:12px;
+}
+
+.selection-preview{
+  background:#0d0d0d;
+  border:1px solid #39ff14;
+  border-radius:12px;
+  padding:12px;
+  color:#39ff14;
+  margin-bottom:15px;
+  min-height:60px;
+}
+
+.cart-btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:#39ff14;
+  color:black;
+  font-size:1rem;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.cart-btn:hover{
+  background:#66ff47;
+}
+
+.cart-section{
+  margin-top:50px;
+  background:#111;
+  border:2px solid #222;
+  border-radius:20px;
+  padding:25px;
+}
+
+.cart-item{
+  padding:15px;
+  border-bottom:1px solid #222;
+  line-height:1.6;
+}
+
+.cart-total{
+  margin-top:20px;
+  font-size:1.4rem;
+  color:#39ff14;
+  font-weight:bold;
+}
+
+.submit-btn{
+  margin-top:20px;
+  width:100%;
+  padding:16px;
+  background:#39ff14;
+  color:black;
+  border:none;
+  border-radius:15px;
+  font-size:1.1rem;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.lightbox.active{
+  display:flex;
+}
+
+.lightbox img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:20px;
+}
+
+.close-lightbox{
+  position:absolute;
+  top:20px;
+  right:20px;
+  color:white;
+  font-size:2rem;
+  cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Joe's Grows Swag</h1>
+  <p>Premium grower gear and accessories.</p>
+</header>
+
+<div class="container">
+
+  <div class="section-title">
+    Featured Products
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+
+  <div class="cart-section">
+
+    <div class="section-title">
+      Cart
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total" id="cartTotal">
+      Subtotal: $0
+    </div>
+
+    <button class="submit-btn" onclick="submitOrder()">
+      Submit Order
+    </button>
+
+  </div>
+
+</div>
+
+<div class="lightbox" id="lightbox">
+
+  <div
+    class="close-lightbox"
+    onclick="closeLightbox()">
+    ✕
+  </div>
+
+  <img id="lightboxImg">
+
+</div>
+
 <script>
 
 const products = [
@@ -9,7 +294,7 @@ const products = [
 
   price:20,
 
-  description:"Choose from 16 available hat styles. Some photos contain multiple hats.",
+  description:"Choose from 16 available hat styles. Some preview images contain multiple hats.",
 
   image:"joes-grows-black-hat.jpeg",
 
@@ -161,6 +446,8 @@ onerror="this.style.display='none'"
 
 ${galleryHTML}
 
+<div class="card-content">
+
 <div class="card-title">
 ${product.name}
 </div>
@@ -175,8 +462,6 @@ ${product.description}
 
 ${optionHTML}
 
-<br>
-
 <button
 class="cart-btn"
 onclick="addToCart(${index})">
@@ -184,6 +469,8 @@ onclick="addToCart(${index})">
 Add To Cart
 
 </button>
+
+</div>
 
 </div>
 
@@ -263,17 +550,24 @@ cartItems.innerHTML += `
 
 <div class="cart-item">
 
+<strong>
 ${item.code}
--
+</strong>
+
+<br>
+
 ${item.name}
 
 ${item.selectedOption ? `
-<br>
+<br><br>
 Selection:
+<strong>
 ${item.selectedOption}
+</strong>
 ` : ""}
 
-<br>
+<br><br>
+
 $${item.price}
 
 <br><br>
@@ -345,3 +639,6 @@ document
 }
 
 </script>
+
+</body>
+</html>
