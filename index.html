@@ -7,22 +7,25 @@
 <title>Joe's Grows Swag</title>
 
 <style>
-
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   background:#050505;
   color:white;
   font-family:Arial,sans-serif;
+  text-align:center;
 }
 
 header{
-  text-align:center;
-  padding:30px 15px 20px;
+  padding:34px 15px 24px;
   background:#000;
   border-bottom:2px solid #39ff14;
 }
@@ -39,11 +42,40 @@ header p{
   font-size:1rem;
 }
 
+.motto{
+  margin-top:18px;
+  font-size:2rem;
+  font-weight:900;
+  color:#39ff14;
+  text-shadow:0 0 15px #39ff14;
+}
+
+.nav{
+  padding:18px 10px;
+  background:#050505;
+}
+
+.nav a{
+  display:inline-block;
+  margin:6px;
+  padding:12px 17px;
+  border:1px solid #39ff14;
+  border-radius:999px;
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+  background:#111;
+}
+
 .container{
   width:100%;
   max-width:1400px;
   margin:auto;
   padding:20px;
+}
+
+.section{
+  margin:35px 0;
 }
 
 .section-title{
@@ -52,6 +84,17 @@ header p{
   text-align:center;
   margin-bottom:25px;
   text-shadow:0 0 10px #39ff14;
+}
+
+.info-box{
+  background:#111;
+  border:2px solid #222;
+  border-radius:20px;
+  padding:24px;
+  max-width:900px;
+  margin:auto;
+  color:#d6d6d6;
+  line-height:1.6;
 }
 
 .product-grid{
@@ -66,13 +109,6 @@ header p{
   border-radius:20px;
   overflow:hidden;
   box-shadow:0 0 20px rgba(0,0,0,0.6);
-  transition:.3s;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-  border-color:#39ff14;
-  box-shadow:0 0 25px rgba(57,255,20,0.4);
 }
 
 .main-product-img{
@@ -96,12 +132,10 @@ header p{
   border-radius:12px;
   border:2px solid #222;
   cursor:pointer;
-  transition:.2s;
 }
 
 .gallery img:hover{
   border-color:#39ff14;
-  transform:scale(1.05);
 }
 
 .card-content{
@@ -124,6 +158,12 @@ header p{
   color:#ccc;
   line-height:1.5;
   margin-bottom:18px;
+}
+
+.shipping-note{
+  color:#39ff14;
+  font-weight:bold;
+  margin-bottom:12px;
 }
 
 .option-select{
@@ -163,11 +203,6 @@ header p{
   font-size:1rem;
   font-weight:bold;
   cursor:pointer;
-  transition:.2s;
-}
-
-.cart-btn:hover{
-  background:#66ff47;
 }
 
 .cart-section{
@@ -191,6 +226,12 @@ header p{
   font-weight:bold;
 }
 
+.shipping-total{
+  margin-top:12px;
+  color:#ccc;
+  line-height:1.5;
+}
+
 .submit-btn{
   margin-top:20px;
   width:100%;
@@ -202,6 +243,25 @@ header p{
   font-size:1.1rem;
   font-weight:bold;
   cursor:pointer;
+}
+
+.qr-img{
+  width:320px;
+  max-width:95%;
+  margin-top:18px;
+  border-radius:14px;
+}
+
+.link-btn{
+  display:block;
+  width:fit-content;
+  margin:16px auto;
+  padding:14px 28px;
+  border:2px solid #39ff14;
+  border-radius:999px;
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
 }
 
 .lightbox{
@@ -233,6 +293,10 @@ header p{
   cursor:pointer;
 }
 
+footer{
+  padding:40px 20px;
+  color:#777;
+}
 </style>
 </head>
 
@@ -240,405 +304,19 @@ header p{
 
 <header>
   <h1>Joe's Grows Swag</h1>
-  <p>Premium grower gear and accessories.</p>
+  <p>Rooting Deep • Harvesting Knowledge</p>
+  <div class="motto">NUGS NOT DRUGS</div>
 </header>
+
+<nav class="nav">
+  <a href="#about">About</a>
+  <a href="#products">Products</a>
+  <a href="#cart">Cart</a>
+  <a href="#worksheet">Worksheet</a>
+  <a href="#links">Links</a>
+</nav>
 
 <div class="container">
 
-  <div class="section-title">
-    Featured Products
-  </div>
-
-  <div class="product-grid" id="productGrid"></div>
-
-  <div class="cart-section">
-
-    <div class="section-title">
-      Cart
-    </div>
-
-    <div id="cartItems"></div>
-
-    <div class="cart-total" id="cartTotal">
-      Subtotal: $0
-    </div>
-
-    <button class="submit-btn" onclick="submitOrder()">
-      Submit Order
-    </button>
-
-  </div>
-
-</div>
-
-<div class="lightbox" id="lightbox">
-
-  <div
-    class="close-lightbox"
-    onclick="closeLightbox()">
-    ✕
-  </div>
-
-  <img id="lightboxImg">
-
-</div>
-
-<script>
-
-const products = [
-
-{
-  code:"JG-01",
-
-  name:"Joe's Grows Hat Collection",
-
-  price:20,
-
-  description:"Choose from 16 available hat styles. Some preview images contain multiple hats.",
-
-  image:"joes-grows-black-hat.jpeg",
-
-  gallery:[
-    "joes-grows-black-hat.jpeg",
-    "seed-2-smoke-podcast-black-hat.jpeg",
-    "joes-grows-nugs-not-drugs-black-hat.jpeg",
-    "joes-grows-pheno-hunter-green-hat.jpeg",
-    "joes-grows-certified-og-black-hat.jpeg",
-    "ghost-cut-emerald-frost-hats.jpeg",
-    "midnight-resin-paper-and-ash-smoke-show-hats.jpeg",
-    "gorilla-grow-harvest-hunter-hats.jpeg",
-    "og-emerald-hat.jpeg",
-    "nugs-not-drugs-black-hat.jpeg",
-    "solauto-black-hat.jpeg",
-    "solauto-cup-black-hat.jpeg"
-  ],
-
-  options:[
-    "Joe's Grows Black Hat",
-    "Seed 2 Smoke Podcast Black Hat",
-    "Joe's Grows Nugs Not Drugs Black Hat",
-    "Joe's Grows Pheno Hunter Green Hat",
-    "Joe's Grows Certified OG Black Hat",
-    "Ghost Cut Hat",
-    "Emerald Frost Hat",
-    "Midnight Resin Hat",
-    "Paper & Ash Hat",
-    "Smoke Show Hat",
-    "Gorilla Grow Hat",
-    "Harvest Hunter Hat",
-    "OG Emerald Hat",
-    "Nugs Not Drugs Black Hat",
-    "Solauto Black Hat",
-    "Solauto Cup Black Hat"
-  ]
-},
-
-{
-  code:"JG-02",
-
-  name:"The Bud Buddy",
-
-  price:35,
-
-  description:"Cannabis grow tent organizer shelf with built-in week tracker.",
-
-  image:"t-b-b-white.jpeg",
-
-  gallery:[
-    "t-b-b-1.jpeg",
-    "t-b-b-2.jpeg",
-    "t-b-b-3.png",
-    "t-b-b-4.jpeg",
-    "t-b-b-white.jpeg",
-    "t-b-b-red.png",
-    "t-b-b-green.png",
-    "t-b-b-blue.png"
-  ],
-
-  options:[
-    "White",
-    "Red",
-    "Green",
-    "Blue"
-  ]
-}
-
-];
-
-let cart = [];
-
-const productGrid =
-document.getElementById("productGrid");
-
-products.forEach((product,index)=>{
-
-let galleryHTML = "";
-
-if(product.gallery){
-
-galleryHTML = `
-<div class="gallery">
-
-${product.gallery.map(img => `
-
-<img
-src="/images/${img}"
-onclick="openLightbox('/images/${img}')"
-onerror="this.style.display='none'"
->
-
-`).join("")}
-
-</div>
-`;
-}
-
-let optionHTML = "";
-
-if(product.options){
-
-optionHTML = `
-
-<select
-class="option-select"
-id="option-${index}"
-onchange="updateSelectionPreview(${index})">
-
-<option value="">
-Select Option
-</option>
-
-${product.options.map(option => `
-
-<option value="${option}">
-${option}
-</option>
-
-`).join("")}
-
-</select>
-
-<div class="option-help">
-Choose your exact style before adding to cart.
-</div>
-
-<div
-class="selection-preview"
-id="preview-${index}">
-
-Selection will appear here.
-
-</div>
-
-`;
-}
-
-productGrid.innerHTML += `
-
-<div class="card">
-
-<img
-class="main-product-img"
-src="/images/${product.image}"
-alt="${product.name}"
-onerror="this.style.display='none'"
->
-
-${galleryHTML}
-
-<div class="card-content">
-
-<div class="card-title">
-${product.name}
-</div>
-
-<div class="price">
-$${product.price}
-</div>
-
-<div class="card-text">
-${product.description}
-</div>
-
-${optionHTML}
-
-<button
-class="cart-btn"
-onclick="addToCart(${index})">
-
-Add To Cart
-
-</button>
-
-</div>
-
-</div>
-
-`;
-});
-
-function updateSelectionPreview(index){
-
-const select =
-document.getElementById(`option-${index}`);
-
-const preview =
-document.getElementById(`preview-${index}`);
-
-if(select.value === ""){
-
-preview.innerHTML =
-"Selection will appear here.";
-
-return;
-}
-
-preview.innerHTML = `
-Selected:<br><br>
-<strong>${select.value}</strong>
-`;
-}
-
-function addToCart(index){
-
-const product = {...products[index]};
-
-if(product.options){
-
-const selectedOption =
-document.getElementById(`option-${index}`).value;
-
-if(selectedOption === ""){
-
-alert("Please select an option.");
-
-return;
-}
-
-product.selectedOption = selectedOption;
-}
-
-cart.push(product);
-
-renderCart();
-}
-
-function removeFromCart(index){
-
-cart.splice(index,1);
-
-renderCart();
-}
-
-function renderCart(){
-
-const cartItems =
-document.getElementById("cartItems");
-
-const cartTotal =
-document.getElementById("cartTotal");
-
-cartItems.innerHTML = "";
-
-let subtotal = 0;
-
-cart.forEach((item,index)=>{
-
-subtotal += item.price;
-
-cartItems.innerHTML += `
-
-<div class="cart-item">
-
-<strong>
-${item.code}
-</strong>
-
-<br>
-
-${item.name}
-
-${item.selectedOption ? `
-<br><br>
-Selection:
-<strong>
-${item.selectedOption}
-</strong>
-` : ""}
-
-<br><br>
-
-$${item.price}
-
-<br><br>
-
-<button
-class="cart-btn"
-onclick="removeFromCart(${index})">
-
-Remove
-
-</button>
-
-</div>
-
-`;
-});
-
-cartTotal.innerHTML =
-`Subtotal: $${subtotal}`;
-}
-
-function submitOrder(){
-
-if(cart.length === 0){
-
-alert("Cart is empty.");
-
-return;
-}
-
-let body =
-"Joe's Grows Order:%0D%0A%0D%0A";
-
-cart.forEach(item => {
-
-body += `${item.code} - ${item.name}`;
-
-if(item.selectedOption){
-
-body += ` - ${item.selectedOption}`;
-}
-
-body += ` - $${item.price}%0D%0A`;
-});
-
-body += `%0D%0A`;
-body += `Customer Name:%0D%0A`;
-body += `Shipping Address:%0D%0A`;
-body += `Email:%0D%0A`;
-
-window.location.href =
-`mailto:joethegrowguy@gmail.com?subject=Joe's Grows Order&body=${body}`;
-}
-
-function openLightbox(src){
-
-document.getElementById("lightboxImg").src = src;
-
-document
-.getElementById("lightbox")
-.classList.add("active");
-}
-
-function closeLightbox(){
-
-document
-.getElementById("lightbox")
-.classList.remove("active");
-}
-
-</script>
-
-</body>
-</html>
+  <section class="section" id="about">
+    <div class="section-title">About Joe's Grows</div
