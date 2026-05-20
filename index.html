@@ -15,6 +15,11 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  --accent: #00b7ff;
+  --accent-glow: rgba(0, 183, 255, 0.75);
+}
+
 body {
   margin: 0;
   background: #050505;
@@ -26,13 +31,13 @@ body {
 header {
   padding: 34px 15px 24px;
   background: #000;
-  border-bottom: 2px solid #39ff14;
+  border-bottom: 2px solid var(--accent);
 }
 
 header h1 {
-  color: #39ff14;
+  color: var(--accent);
   font-size: 2.7rem;
-  text-shadow: 0 0 15px #39ff14;
+  text-shadow: 0 0 15px var(--accent-glow);
   margin: 0 0 10px;
 }
 
@@ -46,8 +51,8 @@ header p {
   margin-top: 18px;
   font-size: 2rem;
   font-weight: 900;
-  color: #39ff14;
-  text-shadow: 0 0 15px #39ff14;
+  color: var(--accent);
+  text-shadow: 0 0 15px var(--accent-glow);
 }
 
 .nav {
@@ -59,7 +64,7 @@ header p {
   display: inline-block;
   margin: 7px;
   padding: 13px 18px;
-  border: 1px solid #39ff14;
+  border: 1px solid var(--accent);
   border-radius: 999px;
   color: white;
   text-decoration: none;
@@ -80,10 +85,10 @@ header p {
 
 .section-title {
   font-size: 2rem;
-  color: #39ff14;
+  color: var(--accent);
   text-align: center;
   margin-bottom: 25px;
-  text-shadow: 0 0 10px #39ff14;
+  text-shadow: 0 0 10px var(--accent-glow);
 }
 
 .info-box {
@@ -136,7 +141,7 @@ header p {
 }
 
 .gallery img:hover {
-  border-color: #39ff14;
+  border-color: var(--accent);
 }
 
 .card-content {
@@ -146,7 +151,7 @@ header p {
 .card-title {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  color: #39ff14;
+  color: var(--accent);
 }
 
 .price {
@@ -156,7 +161,7 @@ header p {
 }
 
 .shipping-note {
-  color: #39ff14;
+  color: var(--accent);
   font-weight: bold;
   margin-bottom: 12px;
 }
@@ -169,7 +174,7 @@ header p {
 
 .option-label {
   text-align: left;
-  color: #39ff14;
+  color: var(--accent);
   font-weight: bold;
   margin: 14px 0 6px;
 }
@@ -193,10 +198,10 @@ header p {
 
 .selection-preview {
   background: #0d0d0d;
-  border: 1px solid #39ff14;
+  border: 1px solid var(--accent);
   border-radius: 12px;
   padding: 12px;
-  color: #39ff14;
+  color: var(--accent);
   margin-bottom: 15px;
   min-height: 55px;
   line-height: 1.5;
@@ -207,7 +212,7 @@ header p {
   padding: 14px;
   border: none;
   border-radius: 14px;
-  background: #39ff14;
+  background: var(--accent);
   color: black;
   font-size: 1rem;
   font-weight: bold;
@@ -231,7 +236,7 @@ header p {
 .cart-total {
   margin-top: 20px;
   font-size: 1.4rem;
-  color: #39ff14;
+  color: var(--accent);
   font-weight: bold;
 }
 
@@ -245,7 +250,7 @@ header p {
   margin-top: 20px;
   width: 100%;
   padding: 16px;
-  background: #39ff14;
+  background: var(--accent);
   color: black;
   border: none;
   border-radius: 15px;
@@ -266,7 +271,7 @@ header p {
   width: fit-content;
   margin: 16px auto;
   padding: 14px 28px;
-  border: 2px solid #39ff14;
+  border: 2px solid var(--accent);
   border-radius: 999px;
   color: white;
   text-decoration: none;
@@ -419,7 +424,7 @@ var products = [
     name: "Joe's Grows Hat Collection",
     price: 20,
     shippingFree: false,
-    description: "Choose from 18 available hat styles. Some preview images contain multiple hats.",
+    description: "Choose from Joe's available hat styles. Basic logo hats are $20. Custom color hats are $25.",
     image: "joes-grows-black-hat.jpeg",
     gallery: [
       "joes-grows-black-hat.jpeg",
@@ -462,13 +467,33 @@ var products = [
         ]
       }
     ],
-    optionHelp: "Some photos show multiple hats. Choose the exact hat style before adding to cart."
+    priceByOption: {
+      "Joe's Grows Black Hat": 20,
+      "Seed 2 Smoke Podcast Black Hat": 20,
+      "Joe's Grows Nugs Not Drugs Black Hat": 20,
+      "Joe's Grows Pheno Hunter Green Hat": 20,
+      "Joe's Grows Certified OG Black Hat": 20,
+      "Ghost Cut Hat": 25,
+      "Emerald Frost Hat": 25,
+      "Midnight Resin Hat": 25,
+      "Paper & Ash Hat": 25,
+      "Smoke Show Hat": 25,
+      "Gorilla Grow Hat": 25,
+      "Harvest Hunter Hat": 25,
+      "OG Emerald Hat": 25,
+      "Nugs Not Drugs Black Hat": 25,
+      "Solauto Black Hat": 25,
+      "Solauto Cup Black Hat": 25,
+      "Nugs Not Drugs Snapback": 25,
+      "Harvest Heroes Snapback": 25
+    },
+    optionHelp: "Basic logo hats are $20. Custom color hats are $25. Choose the exact hat style before adding to cart."
   },
 
   {
     code: "JG-02",
     name: "Joe's Grows Shirt Collection",
-    price: 25,
+    price: 35,
     shippingFree: false,
     description: "Choose from Joe’s official grower shirt designs. Select your design and shirt size before adding to cart.",
     image: "got-cal-mag-shirt.jpeg",
@@ -534,6 +559,33 @@ var products = [
       }
     ],
     optionHelp: "The Bud Buddy is $35 with FREE shipping included."
+  },
+
+  {
+    code: "JG-04",
+    name: "Joe's Grows Stickers",
+    price: 2,
+    shippingFree: false,
+    description: "Add official Joe's Grows and Harvest Heroes stickers to your order. Stickers are $2 each.",
+    image: "nugs-not-drugs-sticker.png",
+    gallery: [
+      "h-h-sticker.png",
+      "nugs-not-drugs-sticker.png",
+      "joes-grows-green-sticker.png",
+      "joes-grows-color-sticker.png"
+    ],
+    optionGroups: [
+      {
+        label: "Sticker Design",
+        options: [
+          "Harvest Heroes HH Sticker",
+          "Nugs Not Drugs Sticker",
+          "Joe's Grows Green QR Sticker",
+          "Joe's Grows Color QR Sticker"
+        ]
+      }
+    ],
+    optionHelp: "Choose one sticker design per cart add. Add multiple stickers separately if you want more than one."
   }
 ];
 
@@ -586,7 +638,14 @@ function buildProducts() {
 
     var price = document.createElement("div");
     price.className = "price";
-    price.textContent = "$" + product.price;
+    price.id = "price-" + index;
+
+    if (product.name === "Joe's Grows Hat Collection") {
+      price.textContent = "$20 - $25";
+    } else {
+      price.textContent = "$" + product.price;
+    }
+
     content.appendChild(price);
 
     var ship = document.createElement("div");
@@ -618,7 +677,13 @@ function buildProducts() {
         group.options.forEach(function(optionText) {
           var option = document.createElement("option");
           option.value = optionText;
-          option.textContent = optionText;
+
+          if (product.priceByOption && product.priceByOption[optionText]) {
+            option.textContent = optionText + " - $" + product.priceByOption[optionText];
+          } else {
+            option.textContent = optionText;
+          }
+
           select.appendChild(option);
         });
 
@@ -676,6 +741,20 @@ function getSelectedOptions(index) {
   return selections;
 }
 
+function getProductPrice(index, selections) {
+  var product = products[index];
+
+  if (product.priceByOption && selections && selections.length > 0) {
+    var firstSelection = selections[0].value;
+
+    if (product.priceByOption[firstSelection]) {
+      return product.priceByOption[firstSelection];
+    }
+  }
+
+  return product.price;
+}
+
 function updateSelectionPreview(index) {
   var product = products[index];
   var preview = document.getElementById("preview-" + index);
@@ -691,28 +770,31 @@ function updateSelectionPreview(index) {
     return;
   }
 
+  var selectedPrice = getProductPrice(index, selections);
   var html = "Selected:<br><br>";
 
   selections.forEach(function(selection) {
     html += "<strong>" + selection.label + ":</strong> " + selection.value + "<br>";
   });
 
-  html += "<br>";
+  html += "<br><strong>Price:</strong> $" + selectedPrice + "<br>";
   html += product.shippingFree ? "FREE shipping included" : "Shipping confirmed by Joe";
 
   preview.innerHTML = html;
 }
 
 function addToCart(index) {
-  var product = Object.assign({}, products[index]);
+  var originalProduct = products[index];
   var selections = getSelectedOptions(index);
 
-  if (product.optionGroups && selections.length !== product.optionGroups.length) {
+  if (originalProduct.optionGroups && selections.length !== originalProduct.optionGroups.length) {
     alert("Please complete all selections before adding to cart.");
     return;
   }
 
+  var product = Object.assign({}, originalProduct);
   product.selections = selections;
+  product.price = getProductPrice(index, selections);
 
   cart.push(product);
   renderCart();
@@ -778,7 +860,7 @@ function renderCart() {
   if (cart.length === 0) {
     shippingTotal.textContent = "Shipping: $0";
   } else if (hasManualShipping && hasFreeShipping) {
-    shippingTotal.textContent = "Shipping: The Bud Buddy includes FREE shipping. Hat/shirt shipping will be confirmed by Joe.";
+    shippingTotal.textContent = "Shipping: The Bud Buddy includes FREE shipping. Other item shipping will be confirmed by Joe.";
   } else if (hasManualShipping) {
     shippingTotal.textContent = "Shipping: Confirm with Joe.";
   } else {
