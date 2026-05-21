@@ -246,6 +246,13 @@ header p {
   line-height: 1.5;
 }
 
+.grand-total {
+  margin-top: 12px;
+  font-size: 1.55rem;
+  color: var(--accent);
+  font-weight: 900;
+}
+
 .submit-btn {
   margin-top: 20px;
   width: 100%;
@@ -349,6 +356,12 @@ footer {
       <p>
         Joe’s Grows is about education, consistency, and building a strong grower community.
       </p>
+      <br>
+      <p>
+        Shipping: Stickers ship for $1 flat. Hats and shirts ship for $13 flat. The Bud Buddy includes free shipping.
+        If your cart qualifies for multiple shipping types, only the highest shipping rate is charged.
+        Orders over $100 ship free.
+      </p>
     </div>
   </section>
 
@@ -364,6 +377,7 @@ footer {
 
       <div class="cart-total" id="cartTotal">Subtotal: $0</div>
       <div class="shipping-total" id="shippingTotal">Shipping: $0</div>
+      <div class="grand-total" id="grandTotal">Total: $0</div>
 
       <button class="submit-btn" onclick="submitOrder()">Submit Order By Email</button>
     </div>
@@ -418,12 +432,26 @@ footer {
 </div>
 
 <script>
+var FREE_SHIPPING_THRESHOLD = 100;
+
+var SHIPPING_RATES = {
+  free: 0,
+  sticker: 1,
+  apparel: 13
+};
+
+var SHIPPING_PRIORITY = {
+  free: 0,
+  sticker: 1,
+  apparel: 2
+};
+
 var products = [
   {
     code: "JG-01",
     name: "Joe's Grows Hat Collection",
     price: 20,
-    shippingFree: false,
+    shippingTier: "apparel",
     description: "Choose from Joe's available hat styles. Basic logo hats are $20. Custom color hats are $25.",
     image: "joes-grows-black-hat.jpeg",
     gallery: [
@@ -494,7 +522,7 @@ var products = [
     code: "JG-02",
     name: "Joe's Grows Shirt Collection",
     price: 35,
-    shippingFree: false,
+    shippingTier: "apparel",
     description: "Choose from Joe’s official grower shirt designs. Select your design and shirt size before adding to cart.",
     image: "got-cal-mag-shirt.jpeg",
     gallery: [
@@ -534,7 +562,7 @@ var products = [
     code: "JG-03",
     name: "The Bud Buddy",
     price: 35,
-    shippingFree: true,
+    shippingTier: "free",
     description: "Cannabis grow tent organizer shelf with built-in week tracker. Great for meters, tools, sprays, and small grow-room gear.",
     image: "t-b-b-white.jpeg",
     gallery: [
@@ -565,7 +593,7 @@ var products = [
     code: "JG-04",
     name: "Joe's Grows Stickers",
     price: 2,
-    shippingFree: false,
+    shippingTier: "sticker",
     description: "Add official Joe's Grows and Harvest Heroes stickers to your order. Stickers are $2 each.",
     image: "nugs-not-drugs-sticker.png",
     gallery: [
@@ -590,6 +618,52 @@ var products = [
 ];
 
 var cart = [];
+
+function getShippingLabel(tier) {
+  if (tier === "apparel") {
+    return "$13 flat shipping";
+  }
+
+  if (tier === "sticker") {
+    return "$1 flat sticker shipping";
+  }
+
+  return "FREE shipping included";
+}
+
+function getShippingDetails(subtotal) {
+  if (cart.length === 0) {
+    return {
+      tier: "free",
+      cost: 0,
+      label: "Shipping: $0"
+    };
+  }
+
+  if (subtotal >= FREE_SHIPPING_THRESHOLD) {
+    return {
+      tier: "free",
+      cost: 0,
+      label: "Shipping: FREE because order is over $" + FREE_SHIPPING_THRESHOLD
+    };
+  }
+
+  var highestTier = "free";
+
+  cart.forEach(function(item) {
+    var itemTier = item.shippingTier || "free";
+
+    if (SHIPPING_PRIORITY[itemTier] > SHIPPING_PRIORITY[highestTier]) {
+      highestTier = itemTier;
+    }
+  });
+
+  return {
+    tier: highestTier,
+    cost: SHIPPING_RATES[highestTier],
+    label: "Shipping: $" + SHIPPING_RATES[highestTier] + " - " + getShippingLabel(highestTier) + " applied"
+  };
+}
 
 function buildProducts() {
   var productGrid = document.getElementById("productGrid");
@@ -650,7 +724,7 @@ function buildProducts() {
 
     var ship = document.createElement("div");
     ship.className = "shipping-note";
-    ship.textContent = product.shippingFree ? "FREE shipping included" : "Shipping confirmed by Joe";
+    ship.textContent = getShippingLabel(product.shippingTier);
     content.appendChild(ship);
 
     var desc = document.createElement("div");
@@ -778,7 +852,7 @@ function updateSelectionPreview(index) {
   });
 
   html += "<br><strong>Price:</strong> $" + selectedPrice + "<br>";
-  html += product.shippingFree ? "FREE shipping included" : "Shipping confirmed by Joe";
+  html += getShippingLabel(product.shippingTier);
 
   preview.innerHTML = html;
 }
@@ -809,21 +883,14 @@ function renderCart() {
   var cartItems = document.getElementById("cartItems");
   var cartTotal = document.getElementById("cartTotal");
   var shippingTotal = document.getElementById("shippingTotal");
+  var grandTotal = document.getElementById("grandTotal");
 
   cartItems.innerHTML = "";
 
   var subtotal = 0;
-  var hasManualShipping = false;
-  var hasFreeShipping = false;
 
   cart.forEach(function(item, index) {
     subtotal += item.price;
-
-    if (item.shippingFree) {
-      hasFreeShipping = true;
-    } else {
-      hasManualShipping = true;
-    }
 
     var div = document.createElement("div");
     div.className = "cart-item";
@@ -841,7 +908,7 @@ function renderCart() {
       item.name + "<br>" +
       selectionsHTML +
       "$" + item.price + "<br>" +
-      (item.shippingFree ? "FREE shipping" : "Shipping confirmed by Joe") +
+      getShippingLabel(item.shippingTier) +
       "<br><br>";
 
     var removeButton = document.createElement("button");
@@ -855,17 +922,12 @@ function renderCart() {
     cartItems.appendChild(div);
   });
 
-  cartTotal.textContent = "Subtotal: $" + subtotal;
+  var shipping = getShippingDetails(subtotal);
+  var finalTotal = subtotal + shipping.cost;
 
-  if (cart.length === 0) {
-    shippingTotal.textContent = "Shipping: $0";
-  } else if (hasManualShipping && hasFreeShipping) {
-    shippingTotal.textContent = "Shipping: The Bud Buddy includes FREE shipping. Other item shipping will be confirmed by Joe.";
-  } else if (hasManualShipping) {
-    shippingTotal.textContent = "Shipping: Confirm with Joe.";
-  } else {
-    shippingTotal.textContent = "Shipping: FREE";
-  }
+  cartTotal.textContent = "Subtotal: $" + subtotal;
+  shippingTotal.textContent = shipping.label;
+  grandTotal.textContent = "Total: $" + finalTotal;
 }
 
 function submitOrder() {
@@ -889,17 +951,16 @@ function submitOrder() {
     }
 
     body += " - $" + item.price;
-
-    if (item.shippingFree) {
-      body += " - FREE shipping";
-    } else {
-      body += " - Shipping confirmed by Joe";
-    }
-
+    body += " - " + getShippingLabel(item.shippingTier);
     body += "%0D%0A";
   });
 
+  var shipping = getShippingDetails(subtotal);
+  var finalTotal = subtotal + shipping.cost;
+
   body += "%0D%0ASubtotal: $" + subtotal + "%0D%0A";
+  body += "Shipping: $" + shipping.cost + " - " + shipping.label.replace("Shipping: ", "") + "%0D%0A";
+  body += "Total: $" + finalTotal + "%0D%0A";
   body += "%0D%0ACustomer Name:%0D%0A";
   body += "Shipping Address:%0D%0A";
   body += "Email:%0D%0A";
