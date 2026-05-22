@@ -253,6 +253,41 @@ header p {
   font-weight: 900;
 }
 
+.checkout-box {
+  margin: 22px auto 0;
+  padding: 18px;
+  max-width: 760px;
+  background: #0d0d0d;
+  border: 1px solid var(--accent);
+  border-radius: 18px;
+  color: #ddd;
+  line-height: 1.6;
+}
+
+.order-number {
+  color: var(--accent);
+  font-size: 1.3rem;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+.payment-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.payment-link {
+  display: block;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--accent);
+  color: black;
+  text-decoration: none;
+  font-weight: 900;
+}
+
 .submit-btn {
   margin-top: 20px;
   width: 100%;
@@ -379,6 +414,31 @@ footer {
       <div class="shipping-total" id="shippingTotal">Shipping: $0</div>
       <div class="grand-total" id="grandTotal">Total: $0</div>
 
+      <div class="checkout-box">
+        <div class="order-number" id="orderNumberDisplay">Order #: JGORD-00000</div>
+
+        <p>
+          Checkout instructions:<br>
+          1. Submit your order by email.<br>
+          2. Send payment using one of the payment buttons below.<br>
+          3. Include your Order # in payment notes if possible.
+        </p>
+
+        <div class="option-label">Payment Method</div>
+        <select class="option-select" id="paymentMethod">
+          <option value="">Select payment method</option>
+          <option value="Cash App">Cash App - $chmidjo</option>
+          <option value="Venmo">Venmo - @Joseph-Schmid-238</option>
+          <option value="PayPal">PayPal - @JosephSchmid815</option>
+        </select>
+
+        <div class="payment-buttons">
+          <a class="payment-link" href="https://cash.app/$chmidjo" target="_blank">Pay Cash App</a>
+          <a class="payment-link" href="https://venmo.com/u/Joseph-Schmid-238" target="_blank">Pay Venmo</a>
+          <a class="payment-link" href="https://paypal.me/JosephSchmid815" target="_blank">Pay PayPal</a>
+        </div>
+      </div>
+
       <button class="submit-btn" onclick="submitOrder()">Submit Order By Email</button>
     </div>
   </section>
@@ -444,6 +504,12 @@ var SHIPPING_PRIORITY = {
   free: 0,
   sticker: 1,
   apparel: 2
+};
+
+var PAYMENT_LINKS = {
+  "Cash App": "https://cash.app/$chmidjo",
+  "Venmo": "https://venmo.com/u/Joseph-Schmid-238",
+  "PayPal": "https://paypal.me/JosephSchmid815"
 };
 
 var products = [
@@ -618,6 +684,29 @@ var products = [
 ];
 
 var cart = [];
+var currentOrderNumber = getOrCreateOrderNumber();
+
+function getOrCreateOrderNumber() {
+  var savedOrder = localStorage.getItem("joes-grows-current-order-number");
+
+  if (savedOrder) {
+    return savedOrder;
+  }
+
+  var randomNumber = Math.floor(10000 + Math.random() * 90000);
+  var orderNumber = "JGORD-" + randomNumber;
+
+  localStorage.setItem("joes-grows-current-order-number", orderNumber);
+  return orderNumber;
+}
+
+function updateOrderNumberDisplay() {
+  var orderNumberDisplay = document.getElementById("orderNumberDisplay");
+
+  if (orderNumberDisplay) {
+    orderNumberDisplay.textContent = "Order #: " + currentOrderNumber;
+  }
+}
 
 function getShippingLabel(tier) {
   if (tier === "apparel") {
@@ -668,6 +757,8 @@ function getShippingDetails(subtotal) {
 function buildProducts() {
   var productGrid = document.getElementById("productGrid");
   productGrid.innerHTML = "";
+
+  updateOrderNumberDisplay();
 
   products.forEach(function(product, index) {
     var card = document.createElement("div");
@@ -936,8 +1027,17 @@ function submitOrder() {
     return;
   }
 
+  var paymentMethodSelect = document.getElementById("paymentMethod");
+  var paymentMethod = paymentMethodSelect ? paymentMethodSelect.value : "";
+
+  if (paymentMethod === "") {
+    alert("Please select a payment method before submitting your order.");
+    return;
+  }
+
   var subtotal = 0;
-  var body = "Joe's Grows Order:%0D%0A%0D%0A";
+  var body = "Joe's Grows Order:%0D%0A";
+  body += "Order #: " + currentOrderNumber + "%0D%0A%0D%0A";
 
   cart.forEach(function(item) {
     subtotal += item.price;
@@ -961,13 +1061,16 @@ function submitOrder() {
   body += "%0D%0ASubtotal: $" + subtotal + "%0D%0A";
   body += "Shipping: $" + shipping.cost + " - " + shipping.label.replace("Shipping: ", "") + "%0D%0A";
   body += "Total: $" + finalTotal + "%0D%0A";
+  body += "Payment Method: " + paymentMethod + "%0D%0A";
+  body += "Payment Link: " + PAYMENT_LINKS[paymentMethod] + "%0D%0A";
+  body += "%0D%0APlease include Order # " + currentOrderNumber + " in payment notes if possible.%0D%0A";
   body += "%0D%0ACustomer Name:%0D%0A";
   body += "Shipping Address:%0D%0A";
   body += "Email:%0D%0A";
   body += "Notes:%0D%0A";
 
   window.location.href =
-    "mailto:joethegrowguy@gmail.com?subject=Joe's Grows Order&body=" + body;
+    "mailto:joethegrowguy@gmail.com?subject=Joe's Grows Order - " + currentOrderNumber + "&body=" + body;
 }
 
 function openLightbox(src) {
