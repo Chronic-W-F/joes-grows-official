@@ -115,6 +115,15 @@ header p {
   line-height: 1.6;
 }
 
+.promo-img {
+  width: 100%;
+  max-width: 950px;
+  border-radius: 20px;
+  border: 2px solid #222;
+  box-shadow: 0 0 25px var(--accent-glow);
+  margin-bottom: 18px;
+}
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -376,6 +385,7 @@ footer {
 
 <nav class="nav">
   <a href="#about">About</a>
+  <a href="#buttons">Buttons</a>
   <a href="#products">Products</a>
   <a href="#cart">Cart</a>
   <a href="#worksheet">Worksheet</a>
@@ -404,9 +414,33 @@ footer {
       <br>
       <p>
         Shipping: Stickers ship for $1 flat. Hats and shirts ship for $13 flat. The Bud Buddy includes free shipping.
-        If your cart qualifies for multiple shipping types, only the highest shipping rate is charged.
+        Button packs include free shipping. If your cart qualifies for multiple shipping types, only the highest shipping rate is charged.
         Orders over $100 ship free.
       </p>
+    </div>
+  </section>
+
+  <section class="section" id="buttons">
+    <div class="section-title">Limited Edition Button Pack</div>
+
+    <div class="info-box">
+      <img
+        src="/images/buttons.png"
+        class="promo-img"
+        alt="Joe's Grows Limited Edition Button Pack"
+      >
+
+      <p>
+        Collect all 4 Joe's Grows buttons in one limited edition pack.
+        Includes Nugs Not Drugs, I Survived Re-Veg 2026, Monster Plant Club,
+        and Harvest Heroes.
+      </p>
+
+      <br>
+
+      <button class="cart-btn" onclick="addToCart(4)">
+        Add Button Pack To Cart - $12.99
+      </button>
     </div>
   </section>
 
@@ -658,7 +692,7 @@ var products = [
     image: "nugs-not-drugs-sticker.png",
     gallery: [
       "nugs-not-drugs-pot-sticker.png",
-"alien-sticker.png",
+      "alien-sticker.png",
       "h-h-sticker.png",
       "nugs-not-drugs-sticker.png",
       "joes-grows-green-sticker.png",
@@ -669,7 +703,7 @@ var products = [
         label: "Sticker Design",
         options: [
           "Nugs Not Drugs Pot Sticker",
-"Take Me To Your Grower Alien Sticker",
+          "Take Me To Your Grower Alien Sticker",
           "Harvest Heroes HH Sticker",
           "Nugs Not Drugs Sticker",
           "Joe's Grows Green QR Sticker",
@@ -678,6 +712,20 @@ var products = [
       }
     ],
     optionHelp: "Choose one sticker design per cart add. Add multiple stickers separately if you want more than one."
+  },
+
+  {
+    code: "JG-05",
+    name: "Limited Edition Button Pack",
+    price: 12.99,
+    shippingTier: "free",
+    description: "Limited edition Joe's Grows button pack. Includes all 4 designs with free shipping.",
+    image: "buttons.png",
+    gallery: [
+      "buttons.png"
+    ],
+    optionGroups: [],
+    optionHelp: "Includes all 4 button designs. Free shipping included."
   }
 ];
 
@@ -1048,4 +1096,4 @@ document.addEventListener("DOMContentLoaded", buildProducts);
 </script>
 
 </body>
-</html>
+  </html>
