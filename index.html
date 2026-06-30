@@ -1,4 +1,4 @@
-8<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -438,7 +438,7 @@ footer {
 
       <br>
 
-      <button class="cart-btn" onclick="addToCart(4)">
+      <button class="cart-btn" onclick="addButtonPackToCart()">
         Add Button Pack To Cart - $12.99
       </button>
     </div>
@@ -454,9 +454,9 @@ footer {
       <div class="section-title">Cart</div>
       <div id="cartItems"></div>
 
-      <div class="cart-total" id="cartTotal">Subtotal: $0</div>
-      <div class="shipping-total" id="shippingTotal">Shipping: $0</div>
-      <div class="grand-total" id="grandTotal">Total: $0</div>
+      <div class="cart-total" id="cartTotal">Subtotal: $0.00</div>
+      <div class="shipping-total" id="shippingTotal">Shipping: $0.00</div>
+      <div class="grand-total" id="grandTotal">Total: $0.00</div>
 
       <div class="checkout-box">
         <p>
@@ -712,24 +712,14 @@ var products = [
       }
     ],
     optionHelp: "Choose one sticker design per cart add. Add multiple stickers separately if you want more than one."
-  },
-
-  {
-    code: "JG-05",
-    name: "Limited Edition Button Pack",
-    price: 12.99,
-    shippingTier: "free",
-    description: "Limited edition Joe's Grows button pack. Includes all 4 designs with free shipping.",
-    image: "buttons.png",
-    gallery: [
-      "buttons.png"
-    ],
-    optionGroups: [],
-    optionHelp: "Includes all 4 button designs. Free shipping included."
   }
 ];
 
 var cart = [];
+
+function money(amount) {
+  return Number(amount).toFixed(2);
+}
 
 function getShippingLabel(tier) {
   if (tier === "apparel") {
@@ -748,7 +738,7 @@ function getShippingDetails(subtotal) {
     return {
       tier: "free",
       cost: 0,
-      label: "Shipping: $0"
+      label: "Shipping: $0.00"
     };
   }
 
@@ -773,7 +763,7 @@ function getShippingDetails(subtotal) {
   return {
     tier: highestTier,
     cost: SHIPPING_RATES[highestTier],
-    label: "Shipping: $" + SHIPPING_RATES[highestTier] + " - " + getShippingLabel(highestTier) + " applied"
+    label: "Shipping: $" + money(SHIPPING_RATES[highestTier]) + " - " + getShippingLabel(highestTier) + " applied"
   };
 }
 
@@ -829,7 +819,7 @@ function buildProducts() {
     if (product.name === "Joe's Grows Hat Collection") {
       price.textContent = "$20 - $25";
     } else {
-      price.textContent = "$" + product.price;
+      price.textContent = "$" + money(product.price);
     }
 
     content.appendChild(price);
@@ -865,7 +855,7 @@ function buildProducts() {
           option.value = optionText;
 
           if (product.priceByOption && product.priceByOption[optionText]) {
-            option.textContent = optionText + " - $" + product.priceByOption[optionText];
+            option.textContent = optionText + " - $" + money(product.priceByOption[optionText]);
           } else {
             option.textContent = optionText;
           }
@@ -963,10 +953,22 @@ function updateSelectionPreview(index) {
     html += "<strong>" + selection.label + ":</strong> " + selection.value + "<br>";
   });
 
-  html += "<br><strong>Price:</strong> $" + selectedPrice + "<br>";
+  html += "<br><strong>Price:</strong> $" + money(selectedPrice) + "<br>";
   html += getShippingLabel(product.shippingTier);
 
   preview.innerHTML = html;
+}
+
+function addButtonPackToCart() {
+  cart.push({
+    code: "JG-05",
+    name: "Limited Edition Button Pack",
+    price: 12.99,
+    shippingTier: "free",
+    selections: []
+  });
+
+  renderCart();
 }
 
 function addToCart(index) {
@@ -1019,7 +1021,7 @@ function renderCart() {
       "<strong>" + item.code + "</strong><br>" +
       item.name + "<br>" +
       selectionsHTML +
-      "$" + item.price + "<br>" +
+      "$" + money(item.price) + "<br>" +
       getShippingLabel(item.shippingTier) +
       "<br><br>";
 
@@ -1037,9 +1039,9 @@ function renderCart() {
   var shipping = getShippingDetails(subtotal);
   var finalTotal = subtotal + shipping.cost;
 
-  cartTotal.textContent = "Subtotal: $" + subtotal.toFixed(2);
-shippingTotal.textContent = shipping.label;
-grandTotal.textContent = "Total: $" + finalTotal.toFixed(2);
+  cartTotal.textContent = "Subtotal: $" + money(subtotal);
+  shippingTotal.textContent = shipping.label;
+  grandTotal.textContent = "Total: $" + money(finalTotal);
 }
 
 function submitOrder() {
@@ -1062,7 +1064,7 @@ function submitOrder() {
       });
     }
 
-    body += " - $" + item.price.toFixed(2);
+    body += " - $" + money(item.price);
     body += " - " + getShippingLabel(item.shippingTier);
     body += "%0D%0A";
   });
@@ -1070,9 +1072,9 @@ function submitOrder() {
   var shipping = getShippingDetails(subtotal);
   var finalTotal = subtotal + shipping.cost;
 
-  body += "%0D%0ASubtotal: $" + subtotal + "%0D%0A";
-  body += "Shipping: $" + shipping.cost + " - " + shipping.label.replace("Shipping: ", "") + "%0D%0A";
-  body += "Total: $" + finalTotal + "%0D%0A";
+  body += "%0D%0ASubtotal: $" + money(subtotal) + "%0D%0A";
+  body += "Shipping: $" + money(shipping.cost) + " - " + shipping.label.replace("Shipping: ", "") + "%0D%0A";
+  body += "Total: $" + money(finalTotal) + "%0D%0A";
   body += "%0D%0APayment Type:%0D%0A";
   body += "%0D%0ACustomer Name:%0D%0A";
   body += "Shipping Address:%0D%0A";
@@ -1096,4 +1098,4 @@ document.addEventListener("DOMContentLoaded", buildProducts);
 </script>
 
 </body>
-  </html>
+</html>
