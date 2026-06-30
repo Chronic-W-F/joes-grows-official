@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+8<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -1037,9 +1037,9 @@ function renderCart() {
   var shipping = getShippingDetails(subtotal);
   var finalTotal = subtotal + shipping.cost;
 
-  cartTotal.textContent = "Subtotal: $" + subtotal;
-  shippingTotal.textContent = shipping.label;
-  grandTotal.textContent = "Total: $" + finalTotal;
+  cartTotal.textContent = "Subtotal: $" + subtotal.toFixed(2);
+shippingTotal.textContent = shipping.label;
+grandTotal.textContent = "Total: $" + finalTotal.toFixed(2);
 }
 
 function submitOrder() {
@@ -1062,7 +1062,7 @@ function submitOrder() {
       });
     }
 
-    body += " - $" + item.price;
+    body += " - $" + item.price.toFixed(2);
     body += " - " + getShippingLabel(item.shippingTier);
     body += "%0D%0A";
   });
