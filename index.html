@@ -7,13 +7,8 @@
 <title>Joe's Grows Swag</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 :root {
   --accent: #00b7ff;
@@ -92,9 +87,7 @@ header p {
   padding: 20px;
 }
 
-.section {
-  margin: 35px 0;
-}
+.section { margin: 35px 0; }
 
 .section-title {
   font-size: 2rem;
@@ -162,13 +155,9 @@ header p {
   flex: 0 0 auto;
 }
 
-.gallery img:hover {
-  border-color: var(--accent);
-}
+.gallery img:hover { border-color: var(--accent); }
 
-.card-content {
-  padding: 20px;
-}
+.card-content { padding: 20px; }
 
 .card-title {
   font-size: 1.5rem;
@@ -343,9 +332,7 @@ header p {
   margin-top: 18px;
 }
 
-.affiliate-list.active {
-  display: block;
-}
+.affiliate-list.active { display: block; }
 
 .affiliate-card {
   background: #0d0d0d;
@@ -363,9 +350,7 @@ header p {
   font-size: 1.35rem;
 }
 
-.affiliate-card p {
-  margin: 8px 0;
-}
+.affiliate-card p { margin: 8px 0; }
 
 .discount-code {
   color: var(--accent);
@@ -383,9 +368,7 @@ header p {
   z-index: 999;
 }
 
-.lightbox.active {
-  display: flex;
-}
+.lightbox.active { display: flex; }
 
 .lightbox img {
   max-width: 90%;
@@ -451,9 +434,9 @@ footer {
       </p>
       <br>
       <p>
-        Shipping: Stickers ship for $1 flat. Hats and shirts ship for $13 flat. The Bud Buddy includes free shipping.
-        Button packs include free shipping. If your cart qualifies for multiple shipping types, only the highest shipping rate is charged.
-        Orders over $100 ship free.
+        Shipping: Stickers ship for $1 flat. Button packs ship for $5 flat. Hats and shirts ship for $13 flat.
+        The Bud Buddy includes free shipping. If your cart qualifies for multiple shipping types, only the highest
+        shipping rate is charged. Orders over $100 ship free.
       </p>
     </div>
   </section>
@@ -462,11 +445,7 @@ footer {
     <div class="section-title">Limited Edition Button Pack</div>
 
     <div class="info-box">
-      <img
-        src="/images/buttons.png"
-        class="promo-img"
-        alt="Joe's Grows Limited Edition Button Pack"
-      >
+      <img src="/images/buttons.png" class="promo-img" alt="Joe's Grows Limited Edition Button Pack">
 
       <p>
         Collect all 4 Joe's Grows buttons in one limited edition pack.
@@ -521,12 +500,7 @@ footer {
     <div class="info-box">
       <p>Scan the QR code below to access Joe’s free cannabis deficiency worksheet.</p>
 
-      <img
-        src="/images/joe-qr.png"
-        class="qr-img"
-        alt="Joe's Grows QR Code"
-        onerror="this.style.display='none'"
-      >
+      <img src="/images/joe-qr.png" class="qr-img" alt="Joe's Grows QR Code" onerror="this.style.display='none'">
     </div>
   </section>
 
@@ -646,13 +620,15 @@ var FREE_SHIPPING_THRESHOLD = 100;
 var SHIPPING_RATES = {
   free: 0,
   sticker: 1,
+  buttons: 5,
   apparel: 13
 };
 
 var SHIPPING_PRIORITY = {
   free: 0,
   sticker: 1,
-  apparel: 2
+  buttons: 2,
+  apparel: 3
 };
 
 var products = [
@@ -726,7 +702,6 @@ var products = [
     },
     optionHelp: "Basic logo hats are $20. Custom color hats are $25. Choose the exact hat style before adding to cart."
   },
-
   {
     code: "JG-02",
     name: "Joe's Grows Shirt Collection",
@@ -754,19 +729,11 @@ var products = [
       },
       {
         label: "Shirt Size",
-        options: [
-          "Small",
-          "Medium",
-          "Large",
-          "XL",
-          "2XL",
-          "3XL"
-        ]
+        options: ["Small", "Medium", "Large", "XL", "2XL", "3XL"]
       }
     ],
     optionHelp: "Select both the shirt design and size before adding to cart."
   },
-
   {
     code: "JG-03",
     name: "The Bud Buddy",
@@ -787,17 +754,11 @@ var products = [
     optionGroups: [
       {
         label: "Bud Buddy Color",
-        options: [
-          "White",
-          "Red",
-          "Green",
-          "Blue"
-        ]
+        options: ["White", "Red", "Green", "Blue"]
       }
     ],
     optionHelp: "The Bud Buddy is $35 with FREE shipping included."
   },
-
   {
     code: "JG-04",
     name: "Joe's Grows Stickers",
@@ -838,6 +799,7 @@ function money(amount) {
 
 function getShippingLabel(tier) {
   if (tier === "apparel") return "$13 flat shipping";
+  if (tier === "buttons") return "$5 flat button shipping";
   if (tier === "sticker") return "$1 flat sticker shipping";
   return "FREE shipping included";
 }
@@ -887,9 +849,7 @@ function buildProducts() {
     mainImg.className = "main-product-img";
     mainImg.src = "/images/" + product.image;
     mainImg.alt = product.name;
-    mainImg.onerror = function() {
-      this.style.display = "none";
-    };
+    mainImg.onerror = function() { this.style.display = "none"; };
     card.appendChild(mainImg);
 
     if (product.gallery && product.gallery.length > 0) {
@@ -900,12 +860,8 @@ function buildProducts() {
         var thumb = document.createElement("img");
         thumb.src = "/images/" + imgName;
         thumb.alt = imgName;
-        thumb.onclick = function() {
-          openLightbox("/images/" + imgName);
-        };
-        thumb.onerror = function() {
-          this.style.display = "none";
-        };
+        thumb.onclick = function() { openLightbox("/images/" + imgName); };
+        thumb.onerror = function() { this.style.display = "none"; };
         gallery.appendChild(thumb);
       });
 
@@ -922,13 +878,7 @@ function buildProducts() {
 
     var price = document.createElement("div");
     price.className = "price";
-
-    if (product.name === "Joe's Grows Hat Collection") {
-      price.textContent = "$20 - $25";
-    } else {
-      price.textContent = "$" + money(product.price);
-    }
-
+    price.textContent = product.name === "Joe's Grows Hat Collection" ? "$20 - $25" : "$" + money(product.price);
     content.appendChild(price);
 
     var ship = document.createElement("div");
@@ -960,20 +910,13 @@ function buildProducts() {
         group.options.forEach(function(optionText) {
           var option = document.createElement("option");
           option.value = optionText;
-
-          if (product.priceByOption && product.priceByOption[optionText]) {
-            option.textContent = optionText + " - $" + money(product.priceByOption[optionText]);
-          } else {
-            option.textContent = optionText;
-          }
-
+          option.textContent = product.priceByOption && product.priceByOption[optionText]
+            ? optionText + " - $" + money(product.priceByOption[optionText])
+            : optionText;
           select.appendChild(option);
         });
 
-        select.onchange = function() {
-          updateSelectionPreview(index);
-        };
-
+        select.onchange = function() { updateSelectionPreview(index); };
         content.appendChild(select);
       });
 
@@ -992,9 +935,7 @@ function buildProducts() {
     var button = document.createElement("button");
     button.className = "cart-btn";
     button.textContent = "Add To Cart";
-    button.onclick = function() {
-      addToCart(index);
-    };
+    button.onclick = function() { addToCart(index); };
     content.appendChild(button);
 
     card.appendChild(content);
@@ -1010,12 +951,8 @@ function getSelectedOptions(index) {
 
   product.optionGroups.forEach(function(group, groupIndex) {
     var select = document.getElementById("option-" + index + "-" + groupIndex);
-
     if (select && select.value !== "") {
-      selections.push({
-        label: group.label,
-        value: select.value
-      });
+      selections.push({ label: group.label, value: select.value });
     }
   });
 
@@ -1027,10 +964,7 @@ function getProductPrice(index, selections) {
 
   if (product.priceByOption && selections && selections.length > 0) {
     var firstSelection = selections[0].value;
-
-    if (product.priceByOption[firstSelection]) {
-      return product.priceByOption[firstSelection];
-    }
+    if (product.priceByOption[firstSelection]) return product.priceByOption[firstSelection];
   }
 
   return product.price;
@@ -1039,7 +973,6 @@ function getProductPrice(index, selections) {
 function updateSelectionPreview(index) {
   var product = products[index];
   var preview = document.getElementById("preview-" + index);
-
   if (!preview) return;
 
   var selections = getSelectedOptions(index);
@@ -1067,7 +1000,7 @@ function addButtonPackToCart() {
     code: "JG-05",
     name: "Limited Edition Button Pack",
     price: 12.99,
-    shippingTier: "free",
+    shippingTier: "buttons",
     selections: []
   });
 
@@ -1103,7 +1036,6 @@ function renderCart() {
   var grandTotal = document.getElementById("grandTotal");
 
   cartItems.innerHTML = "";
-
   var subtotal = 0;
 
   cart.forEach(function(item, index) {
@@ -1131,9 +1063,7 @@ function renderCart() {
     var removeButton = document.createElement("button");
     removeButton.className = "cart-btn";
     removeButton.textContent = "Remove";
-    removeButton.onclick = function() {
-      removeFromCart(index);
-    };
+    removeButton.onclick = function() { removeFromCart(index); };
 
     div.appendChild(removeButton);
     cartItems.appendChild(div);
@@ -1158,7 +1088,6 @@ function submitOrder() {
 
   cart.forEach(function(item) {
     subtotal += item.price;
-
     body += item.code + " - " + item.name;
 
     if (item.selections && item.selections.length > 0) {
