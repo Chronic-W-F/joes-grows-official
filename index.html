@@ -331,8 +331,46 @@ header p {
   border: 2px solid var(--accent);
   border-radius: 999px;
   color: white;
+  background: #111;
   text-decoration: none;
   font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.affiliate-list {
+  display: none;
+  margin-top: 18px;
+}
+
+.affiliate-list.active {
+  display: block;
+}
+
+.affiliate-card {
+  background: #0d0d0d;
+  border: 1px solid var(--accent);
+  border-radius: 18px;
+  padding: 18px;
+  margin: 16px auto;
+  max-width: 620px;
+  box-shadow: 0 0 14px rgba(0, 183, 255, 0.35);
+}
+
+.affiliate-card h3 {
+  color: var(--accent);
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+}
+
+.affiliate-card p {
+  margin: 8px 0;
+}
+
+.discount-code {
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 
 .lightbox {
@@ -504,9 +542,86 @@ footer {
         Support Joe
       </a>
 
-      <a class="link-btn" href="https://beacons.ai/joesgrows" target="_blank">
+      <button class="link-btn" onclick="toggleAffiliates()">
         Gear & Affiliate Links
-      </a>
+      </button>
+
+      <div class="affiliate-list" id="affiliateList">
+
+        <div class="affiliate-card">
+          <h3>Affiliate Links Tree</h3>
+          <a class="payment-link" href="https://beacons.ai/joesgrows" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="affiliate-card">
+          <h3>Captain Redbeard Seeds</h3>
+          <p>20% OFF</p>
+          <p class="discount-code">Code: SEAWEED</p>
+          <a class="payment-link" href="https://captainredbeardseeds.com" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="affiliate-card">
+          <h3>Survival Mode Grows</h3>
+          <p>15% OFF</p>
+          <p class="discount-code">Code: GOATED15</p>
+          <a class="payment-link" href="https://www.survivalmodegrows.com/" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="affiliate-card">
+          <h3>STASHLOGIX</h3>
+          <p>10% OFF</p>
+          <p class="discount-code">Code: NUGSNOTDRUGS</p>
+          <a class="payment-link" href="https://share.google/aEFdrKBP1D8aNQy4b" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="affiliate-card">
+          <h3>RDJ BOUNS</h3>
+          <p>10% OFF</p>
+          <p class="discount-code">Code: NUGSNOTDRUGS</p>
+          <a class="payment-link" href="https://rdjbouns.com/?ref=JOSEPHSCHMID" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="affiliate-card">
+          <h3>Pork Chops Flower Stack Attack</h3>
+          <a class="payment-link" href="https://flowerstackattack.com/discount/Nugsnotdrugs?aff=19" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="affiliate-card">
+          <h3>Recherche Genetics</h3>
+          <p>50% OFF</p>
+          <p class="discount-code">Code: JOESGROWS</p>
+          <a class="payment-link" href="https://recherchegenetics.com/420/9/" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="affiliate-card">
+          <h3>Bud Trainer</h3>
+          <p>10% OFF</p>
+          <p class="discount-code">Code: JOESGROWS</p>
+          <a class="payment-link" href="https://budtrainer.com/?sca_ref=6465031.ExxmDhaPLOTDc4om&utm_source=uppromote&utm_medium=affiliate&utm_campaign=affiliate_tracking" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="affiliate-card">
+          <h3>Elev8 Seeds</h3>
+          <p>15% OFF</p>
+          <p class="discount-code">Code: JOESGROWS</p>
+          <a class="payment-link" href="https://elev8seeds.com" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="affiliate-card">
+          <h3>Grow Ace</h3>
+          <p>5% OFF</p>
+          <p class="discount-code">Code: JOE5</p>
+          <a class="payment-link" href="https://growace.com/pages/aircube-hydroponic-systems?rfsn=8332865.c4c7e9&utm_source=refersion&utm_medium=affiliate&utm_campaign=8332865.c4c7e9" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="affiliate-card">
+          <h3>Grow Peaceful</h3>
+          <p>10% OFF</p>
+          <p class="discount-code">Code: JOESGROWS</p>
+          <a class="payment-link" href="https://growpeaceful.com" target="_blank">Visit Website</a>
+        </div>
+
+      </div>
 
       <a class="link-btn" href="mailto:joethegrowguy@gmail.com">
         Contact Joe
@@ -722,24 +837,14 @@ function money(amount) {
 }
 
 function getShippingLabel(tier) {
-  if (tier === "apparel") {
-    return "$13 flat shipping";
-  }
-
-  if (tier === "sticker") {
-    return "$1 flat sticker shipping";
-  }
-
+  if (tier === "apparel") return "$13 flat shipping";
+  if (tier === "sticker") return "$1 flat sticker shipping";
   return "FREE shipping included";
 }
 
 function getShippingDetails(subtotal) {
   if (cart.length === 0) {
-    return {
-      tier: "free",
-      cost: 0,
-      label: "Shipping: $0.00"
-    };
+    return { tier: "free", cost: 0, label: "Shipping: $0.00" };
   }
 
   if (subtotal >= FREE_SHIPPING_THRESHOLD) {
@@ -754,7 +859,6 @@ function getShippingDetails(subtotal) {
 
   cart.forEach(function(item) {
     var itemTier = item.shippingTier || "free";
-
     if (SHIPPING_PRIORITY[itemTier] > SHIPPING_PRIORITY[highestTier]) {
       highestTier = itemTier;
     }
@@ -765,6 +869,10 @@ function getShippingDetails(subtotal) {
     cost: SHIPPING_RATES[highestTier],
     label: "Shipping: $" + money(SHIPPING_RATES[highestTier]) + " - " + getShippingLabel(highestTier) + " applied"
   };
+}
+
+function toggleAffiliates() {
+  document.getElementById("affiliateList").classList.toggle("active");
 }
 
 function buildProducts() {
@@ -814,7 +922,6 @@ function buildProducts() {
 
     var price = document.createElement("div");
     price.className = "price";
-    price.id = "price-" + index;
 
     if (product.name === "Joe's Grows Hat Collection") {
       price.textContent = "$20 - $25";
@@ -899,9 +1006,7 @@ function getSelectedOptions(index) {
   var product = products[index];
   var selections = [];
 
-  if (!product.optionGroups || product.optionGroups.length === 0) {
-    return selections;
-  }
+  if (!product.optionGroups || product.optionGroups.length === 0) return selections;
 
   product.optionGroups.forEach(function(group, groupIndex) {
     var select = document.getElementById("option-" + index + "-" + groupIndex);
@@ -935,9 +1040,7 @@ function updateSelectionPreview(index) {
   var product = products[index];
   var preview = document.getElementById("preview-" + index);
 
-  if (!preview) {
-    return;
-  }
+  if (!preview) return;
 
   var selections = getSelectedOptions(index);
 
